@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SIX SEX ULTRA ✦ La Cueva Pionera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+
+<style>
+/* ═══════════════════════════════════════
+   ROOT & RESET
+═══════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --p:#ff00ff;--c:#00ffff;--y:#ffff00;--r:#ff0044;
+  --bg:#050505;--dark:#0a0010;
+  --gp:0 0 8px #ff00ff,0 0 25px #ff00ff,0 0 50px #ff00ff66;
+  --gc:0 0 8px #00ffff,0 0 25px #00ffff,0 0 50px #00ffff66;
+  --fp:'Press Start 2P',cursive;
+  --fv:'VT323',monospace;
+  --fm:'Share Tech Mono',monospace;
+}
+html{scroll-behavior:smooth}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#000}
+::-webkit-scrollbar-thumb{background:var(--p);box-shadow:var(--gp)}
+
+body{
+  background:var(--bg);color:#fff;font-family:var(--fv);
+  font-size:20px;overflow-x:hidden;cursor:none;
+}
+
+/* ═══════════════════════════════════════
+   SVG GLITCH FILTER (chromatic aberration)
+═══════════════════════════════════════ */
+.svg-filters{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ═══════════════════════════════════════
+   CURSOR CUSTOM
+═══════════════════════════════════════ */
+#cur{
+  position:fixed;width:18px;height:18px;border-radius:50%;
+  background:var(--p);pointer-events:none;z-index:99999;
+  transform:translate(-50%,-50%);mix-blend-mode:difference;
+  box-shadow:var(--gp);transition:transform .07s,width .12s,height .12s;
+}
+#cur.big{width:44px;height:44px;background:var(--c);box-shadow:var(--gc)}
+#cur2{
+  position:fixed;width:8px;height:8px;border-radius:50%;
+  background:var(--p);opacity:.5;pointer-events:none;z-index:99998;
+  transform:translate(-50%,-50%);transition:left .11s ease,top .11s ease;
+  box-shadow:0 0 6px var(--p);
+}
+
+/* ═══════════════════════════════════════
+   PARTICLES CANVAS
+═══════════════════════════════════════ */
+#cv{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;opacity:.55;
+}
+
+/* ═══════════════════════════════════════
+   SCANLINES PERMANENT OVERLAY
+═══════════════════════════════════════ */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9990;
+  background:repeating-linear-gradient(
+    0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px
+  );
+}
+/* RGB noise flicker */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9989;
+  animation:noize .15s steps(1) infinite;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@keyframes noize{
+  0%{transform:translate(0,0)}10%{transform:translate(-3px,1px)}
+  20%{transform:translate(2px,-2px)}30%{transform:translate(-1px,3px)}
+  40%{transform:translate(3px,0)}50%{transform:translate(-2px,-1px)}
+  60%{transform:translate(1px,2px)}70%{transform:translate(2px,-3px)}
+  80%{transform:translate(-3px,2px)}90%{transform:translate(3px,1px)}100%{transform:translate(0,0)}
+}
+
+/* ═══════════════════════════════════════
+   ENTRY GATE
+═══════════════════════════════════════ */
+#gate{
+  position:fixed;inset:0;background:#000;z-index:99995;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:35px;
+  transition:opacity 1.4s ease,visibility 1.4s;
+}
+#gate.out{opacity:0;visibility:hidden;pointer-events:none}
+
+.gate-title{
+  font-family:var(--fp);font-size:clamp(2rem,8vw,5rem);
+  color:var(--p);text-shadow:var(--gp);text-align:center;
+  line-height:1.7;animation:glitchTxt 2.5s infinite;
+}
+.gate-warn{
+  font-family:var(--fm);font-size:.72rem;color:#ff00ff77;
+  letter-spacing:3px;text-align:center;animation:blink .9s step-end infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+#gatebtn{
+  font-family:var(--fp);font-size:.8rem;
+  padding:16px 45px;background:transparent;border:3px solid var(--p);
+  color:var(--p);cursor:none;letter-spacing:3px;position:relative;
+  overflow:hidden;transition:color .3s;text-transform:uppercase;
+}
+#gatebtn::before{
+  content:'';position:absolute;inset:0;background:var(--p);
+  transform:scaleX(0);transform-origin:left;transition:transform .3s;z-index:-1;
+}
+#gatebtn:hover{color:#000;box-shadow:var(--gp)}
+#gatebtn:hover::before{transform:scaleX(1)}
+
+/* ═══════════════════════════════════════
+   GLITCH TEXT ANIMATION
+═══════════════════════════════════════ */
+@keyframes glitchTxt{
+  0%,100%{text-shadow:var(--gp)}
+  2%{text-shadow:5px 0 var(--c),-5px 0 var(--r);clip-path:polygon(0 10%,100% 10%,100% 25%,0 25%);transform:translateX(5px)}
+  4%{clip-path:polygon(0 55%,100% 55%,100% 70%,0 70%);transform:translateX(-4px);text-shadow:-5px 0 var(--c),5px 0 var(--r)}
+  6%,90%{clip-path:none;transform:none;text-shadow:var(--gp)}
+  92%{text-shadow:3px 0 var(--p),-3px 0 var(--c);transform:skewX(4deg)}
+  94%{transform:skewX(-3deg)}96%{transform:none}
+}
+
+.glitch{display:inline-block;animation:glitchTxt 4s infinite}
+.g-slow{animation-duration:7s}
+.g-fast{animation-duration:1.6s}
+
+/* chromatic aberration via filter */
+.chr{filter:url(#ca)}
+
+/* ═══════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:8000;
+  background:rgba(0,0,0,.88);backdrop-filter:blur(12px);
+  border-bottom:2px solid var(--p);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 28px;box-shadow:0 2px 30px #ff00ff33;
+}
+.nav-logo{font-family:var(--fp);font-size:.8rem;color:var(--p);text-shadow:var(--gp);letter-spacing:2px}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap}
+.nav-links a{
+  font-family:var(--fm);font-size:.68rem;color:#bbb;text-decoration:none;
+  padding:5px 10px;border:1px solid transparent;text-transform:uppercase;
+  letter-spacing:1px;transition:all .2s;
+}
+.nav-links a:hover{border-color:var(--p);color:var(--p);background:#ff00ff11;text-shadow:0 0 8px var(--p)}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+#hero{
+  position:relative;height:100vh;min-height:580px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  background:radial-gradient(ellipse at 50% 40%,#2d003a 0%,#000 75%);z-index:1;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(90deg,transparent,transparent 79px,#ff00ff09 79px,#ff00ff09 80px),
+    repeating-linear-gradient(0deg,transparent,transparent 79px,#ff00ff09 79px,#ff00ff09 80px);
+  animation:gridDrift 10s linear infinite;
+}
+@keyframes gridDrift{from{background-position:0 0}to{background-position:80px 80px}}
+
+.hero-vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,transparent 40%,#000 100%);
+}
+
+.hero-inner{position:relative;z-index:2;padding:20px}
+
+.h-six{
+  font-family:var(--fp);font-size:clamp(3rem,10vw,7.5rem);
+  color:var(--p);line-height:1;letter-spacing:6px;
+  text-shadow:var(--gp);animation:glitchTxt 3s infinite;
+}
+.h-ultra{
+  font-family:var(--fp);font-size:clamp(4.5rem,15vw,12rem);
+  line-height:.85;
+  background:linear-gradient(135deg,var(--p) 0%,var(--c) 50%,var(--p) 100%);
+  background-size:200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:glitchTxt 5s infinite,ultrapulse 2.2s ease-in-out infinite;
+}
+@keyframes ultrapulse{0%,100%{background-position:0%;filter:brightness(1)}50%{background-position:100%;filter:brightness(1.25)}}
+
+.h-sub{
+  font-family:var(--fv);font-size:clamp(1.3rem,3vw,2.2rem);
+  color:var(--c);letter-spacing:7px;margin:18px 0 8px;
+  text-shadow:var(--gc);text-transform:uppercase;
+}
+.h-pio{
+  font-family:var(--fm);font-size:.78rem;color:#ff00ff88;letter-spacing:3px;margin-bottom:38px;
+}
+.h-cta{
+  display:inline-block;font-family:var(--fp);font-size:.68rem;
+  padding:15px 34px;background:linear-gradient(135deg,var(--p),#7700ff);
+  color:#fff;border:none;cursor:none;text-transform:uppercase;
+  letter-spacing:3px;text-decoration:none;
+  animation:ctap 2s ease-in-out infinite;transition:all .3s;
+}
+@keyframes ctap{0%,100%{box-shadow:var(--gp);transform:scale(1)}50%{box-shadow:0 0 20px #ff00ff,0 0 60px #ff00ff,0 0 100px #ff00ff;transform:scale(1.04)}}
+.h-cta:hover{transform:scale(1.1) skewX(-3deg) !important;filter:brightness(1.3)}
+
+/* ═══════════════════════════════════════
+   MARQUEE
+═══════════════════════════════════════ */
+.mq{overflow:hidden;padding:10px 0;position:relative;z-index:2}
+.mq-inner{display:flex;white-space:nowrap;animation:scroll 20s linear infinite}
+.mq-inner.rev{animation-direction:reverse;animation-duration:24s}
+.mq span{font-family:var(--fp);font-size:.55rem;padding:0 28px;letter-spacing:2px}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══════════════════════════════════════
+   SECTION COMMON
+═══════════════════════════════════════ */
+section{position:relative;z-index:1;padding:80px 20px}
+.inn{max-width:1100px;margin:0 auto}
+.stitle{
+  font-family:var(--fp);font-size:clamp(.85rem,2.5vw,1.5rem);
+  color:var(--p);text-shadow:var(--gp);margin-bottom:48px;
+  text-transform:uppercase;display:flex;align-items:center;gap:14px;
+}
+.stitle::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--p),transparent)}
+
+/* ═══════════════════════════════════════
+   WELCOME
+═══════════════════════════════════════ */
+#welcome{background:linear-gradient(180deg,#000 0%,#0a0010 100%)}
+.wbox{
+  border:2px solid var(--p);padding:50px;background:#0d0012;
+  box-shadow:inset 0 0 40px #ff00ff0a,0 0 40px #ff00ff22;
+  text-align:center;position:relative;overflow:hidden;
+}
+.wbox::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--p),var(--c),transparent);
+  animation:scanline 3s linear infinite;
+}
+@keyframes scanline{from{top:0;left:-100%}to{top:100%;left:100%}}
+.wbox h2{font-family:var(--fp);font-size:clamp(1.2rem,3vw,2.2rem);color:var(--p);text-shadow:var(--gp);margin-bottom:22px}
+.wbox p{font-family:var(--fv);font-size:1.35rem;color:#ccc;line-height:1.8;max-width:750px;margin:0 auto}
+
+/* ═══════════════════════════════════════
+   BIO
+═══════════════════════════════════════ */
+#bio{background:#050010}
+.bio-grid{display:grid;grid-template-columns:1fr 1.7fr;gap:50px;align-items:start}
+@media(max-width:680px){.bio-grid{grid-template-columns:1fr}}
+
+.bio-img{
+  border:3px solid var(--p);box-shadow:var(--gp);
+  width:100%;display:block;filter:saturate(1.4) contrast(1.08);
+  transition:all .5s;
+}
+.bio-img:hover{
+  transform:scale(1.04) rotate(-1.5deg);
+  filter:saturate(2.2) hue-rotate(18deg);
+  box-shadow:0 0 50px var(--p),0 0 90px #ff00ff55;
+}
+.bio-frame{position:relative}
+.bio-frame::after{
+  content:'';position:absolute;inset:-7px;border:2px solid var(--c);
+  animation:framerot 6s linear infinite;pointer-events:none;
+  clip-path:polygon(0 0,30% 0,30% 4px,0 4px);
+}
+@keyframes framerot{
+  0%{clip-path:polygon(0 0,30% 0,30% 3px,0 3px)}
+  25%{clip-path:polygon(97% 0,100% 0,100% 30%,97% 30%)}
+  50%{clip-path:polygon(70% 97%,100% 97%,100% 100%,70% 100%)}
+  75%{clip-path:polygon(0 70%,3px 70%,3px 100%,0 100%)}
+  100%{clip-path:polygon(0 0,30% 0,30% 3px,0 3px)}
+}
+
+.tag{
+  display:inline-block;font-family:var(--fm);font-size:.68rem;
+  padding:3px 9px;border:1px solid var(--p);color:var(--p);margin:3px;
+  animation:tagflick 4s ease-in-out infinite;
+}
+.tag:nth-child(2n){border-color:var(--c);color:var(--c);animation-delay:.5s}
+.tag:nth-child(3n){border-color:var(--y);color:var(--y);animation-delay:1s}
+@keyframes tagflick{0%,100%{opacity:1}50%{opacity:.55}}
+
+.btext{font-family:var(--fv);font-size:1.3rem;color:#ddd;line-height:1.75;margin:18px 0}
+.btext strong{color:var(--p)}.btext em{color:var(--c);font-style:normal}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+@media(max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}}
+.sbox{
+  border:1px solid #ff00ff44;padding:14px;text-align:center;
+  background:#ff00ff08;transition:all .3s;cursor:default;
+}
+.sbox:hover{border-color:var(--p);background:#ff00ff18;transform:translateY(-5px);box-shadow:0 8px 30px #ff00ff44}
+.sn{font-family:var(--fp);font-size:1.4rem;color:var(--p);text-shadow:var(--gp);display:block}
+.sl{font-family:var(--fm);font-size:.6rem;color:#777;letter-spacing:1px;margin-top:4px}
+
+/* ═══════════════════════════════════════
+   NEWS
+═══════════════════════════════════════ */
+#news{background:#080010}
+
+.cdbox{
+  text-align:center;margin:0 0 50px;padding:30px;
+  border:2px solid var(--p);background:#0d0012;
+  box-shadow:inset 0 0 25px #ff00ff0d,0 0 30px #ff00ff1a;
+}
+.cdlbl{font-family:var(--fp);font-size:.62rem;color:var(--c);letter-spacing:3px;margin-bottom:18px}
+#cd{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.cu{display:flex;flex-direction:column;align-items:center}
+.cn{
+  font-family:var(--fp);font-size:clamp(1.8rem,5vw,3.5rem);color:var(--p);
+  text-shadow:var(--gp);line-height:1;min-width:80px;text-align:center;
+  background:#0d0012;border:2px solid #ff00ff44;padding:9px;
+  animation:numflk 6s ease-in-out infinite;
+}
+@keyframes numflk{0%,94%,100%{opacity:1}95%{opacity:.3}97%{opacity:1}98%{opacity:.5}}
+.clb{font-family:var(--fm);font-size:.58rem;color:#555;margin-top:5px;letter-spacing:2px}
+
+.ngrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.ncard{
+  border:2px solid #ff00ff22;background:#0d0012;padding:24px;
+  position:relative;overflow:hidden;transition:all .4s;cursor:default;
+}
+.ncard::before{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,var(--p),transparent);transition:left .4s;
+}
+.ncard:hover{border-color:var(--p);transform:translateY(-7px) skewY(-.4deg);box-shadow:0 12px 40px #ff00ff33}
+.ncard:hover::before{left:100%}
+.ndate{font-family:var(--fm);font-size:.66rem;color:var(--c);letter-spacing:2px;margin-bottom:8px}
+.nbadge{
+  display:inline-block;font-family:var(--fp);font-size:.46rem;
+  padding:3px 8px;background:var(--p);color:#000;margin-bottom:10px;
+  animation:bdgp 2s ease-in-out infinite;
+}
+@keyframes bdgp{0%,100%{box-shadow:0 0 6px var(--p)}50%{box-shadow:0 0 22px var(--p)}}
+.ntitle{font-family:var(--fp);font-size:.72rem;color:var(--p);margin-bottom:10px;line-height:1.6}
+.nbody{font-family:var(--fv);font-size:1.15rem;color:#bbb;line-height:1.6}
+
+/* ═══════════════════════════════════════
+   GALLERY
+═══════════════════════════════════════ */
+#gallery{background:#000}
+.gfilters{display:flex;gap:8px;margin-bottom:26px;flex-wrap:wrap}
+.gfbtn{
+  font-family:var(--fm);font-size:.65rem;padding:5px 14px;
+  background:transparent;border:1px solid #ff00ff33;color:#666;
+  cursor:none;letter-spacing:1px;transition:all .2s;
+}
+.gfbtn.on,.gfbtn:hover{border-color:var(--p);color:var(--p);background:#ff00ff11;text-shadow:0 0 8px var(--p)}
+
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.gi{
+  position:relative;overflow:hidden;border:2px solid #ff00ff1a;
+  aspect-ratio:1;cursor:none;background:#0d0012;
+  transition:all .3s;
+}
+.gi:hover{border-color:var(--p);box-shadow:0 0 25px #ff00ff44}
+.gi img,.gi .ph{width:100%;height:100%;object-fit:cover;transition:all .5s;filter:saturate(1.2)}
+.gi:hover img,.gi:hover .ph{transform:scale(1.13) rotate(2deg);filter:saturate(2.4) hue-rotate(18deg) brightness(1.15)}
+.gi::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,#ff00ff1a,transparent,#00ffff1a);
+  opacity:0;transition:opacity .3s;
+}
+.gi:hover::after{opacity:1}
+.gi-lbl{
+  position:absolute;bottom:0;left:0;right:0;padding:7px 9px;
+  background:linear-gradient(transparent,rgba(0,0,0,.92));
+  font-family:var(--fm);font-size:.6rem;color:var(--p);letter-spacing:1px;
+  transform:translateY(100%);transition:transform .3s;
+}
+.gi:hover .gi-lbl{transform:translateY(0)}
+.ph{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,#1a001a,#000814,#0d0020);
+  font-family:var(--fp);font-size:.5rem;color:#ff00ff44;text-align:center;padding:10px;
+}
+.ph span:first-child{font-size:2.5rem;filter:drop-shadow(0 0 14px #ff00ff)}
+
+/* ═══════════════════════════════════════
+   VIDEOS
+═══════════════════════════════════════ */
+#videos{background:linear-gradient(180deg,#000,#08000f)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.vwrap{
+  border:2px solid var(--p);box-shadow:0 0 20px #ff00ff2a;overflow:hidden;
+  transition:all .3s;position:relative;
+}
+.vwrap:hover{box-shadow:0 0 50px #ff00ff55;transform:scale(1.02)}
+.vwrap iframe{width:100%;aspect-ratio:16/9;display:block;border:none}
+.vcap{padding:9px 13px;background:#0d0012;font-family:var(--fm);font-size:.64rem;color:var(--p);letter-spacing:1px}
+
+/* ═══════════════════════════════════════
+   COMMUNITY
+═══════════════════════════════════════ */
+#community{background:#050010}
+.ccgrid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+@media(max-width:680px){.ccgrid{grid-template-columns:1fr}}
+
+.dbox{
+  border:3px solid #5865F2;background:#0e0e1a;padding:35px;
+  text-align:center;position:relative;overflow:hidden;transition:all .4s;
+}
+.dbox::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#5865F21a,transparent);pointer-events:none}
+.dbox:hover{box-shadow:0 0 45px #5865F244;transform:translateY(-5px)}
+.dico{font-size:3.5rem;display:block;margin-bottom:14px;filter:drop-shadow(0 0 10px #5865F2)}
+.dtitle{font-family:var(--fp);font-size:.85rem;color:#5865F2;margin-bottom:10px;text-shadow:0 0 15px #5865F2}
+.ddesc{font-family:var(--fv);font-size:1.1rem;color:#aaa;margin-bottom:22px}
+
+.slinks{display:flex;flex-direction:column;gap:13px}
+.sl-a{
+  display:flex;align-items:center;gap:14px;padding:15px 18px;
+  border:1px solid #ff00ff2a;background:#0d0012;text-decoration:none;
+  color:#fff;transition:all .3s;position:relative;overflow:hidden;
+}
+.sl-a::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--p);transform:scaleY(0);transition:transform .3s;
+}
+.sl-a:hover{border-color:var(--p);background:#ff00ff0a;transform:translateX(6px)}
+.sl-a:hover::before{transform:scaleY(1)}
+.sl-ico{font-size:1.5rem}
+.sl-handle{font-family:var(--fp);font-size:.6rem;color:var(--p);display:block}
+.sl-name{font-family:var(--fm);font-size:.62rem;color:#555;letter-spacing:1px}
+
+/* ═══════════════════════════════════════
+   PROPOSALS FORM
+═══════════════════════════════════════ */
+#proposals{background:#000}
+.fwrap{
+  max-width:680px;margin:0 auto;border:2px solid var(--p);
+  padding:42px;background:#0d0012;
+  box-shadow:inset 0 0 45px #ff00ff09,0 0 45px #ff00ff1a;
+  position:relative;
+}
+.fwrap::before{
+  content:'// TRANSMISIÓN DIRECTA A SIX SEX //';
+  position:absolute;top:-11px;left:18px;background:#0d0012;
+  padding:0 10px;font-family:var(--fm);font-size:.6rem;
+  color:var(--c);letter-spacing:2px;
+}
+.fg{margin-bottom:20px}
+.flbl{font-family:var(--fm);font-size:.65rem;color:var(--c);letter-spacing:2px;display:block;margin-bottom:7px}
+.fi,.fsel,.fta{
+  width:100%;background:#050505;border:1px solid #ff00ff33;
+  color:#fff;padding:11px 14px;font-family:var(--fv);font-size:1.2rem;
+  outline:none;transition:border-color .3s,box-shadow .3s;
+}
+.fi:focus,.fsel:focus,.fta:focus{border-color:var(--p);box-shadow:0 0 15px #ff00ff2a}
+.fta{resize:vertical;min-height:120px}
+.fsel{cursor:none}.fsel option{background:#0d0012}
+.fbtn{
+  width:100%;font-family:var(--fp);font-size:.7rem;padding:17px;
+  background:linear-gradient(135deg,var(--p),#8800cc);color:#fff;
+  border:none;cursor:none;letter-spacing:3px;position:relative;
+  overflow:hidden;transition:all .3s;margin-top:8px;
+}
+.fbtn::before{
+  content:'';position:absolute;top:50%;left:50%;
+  width:0;height:0;background:rgba(255,255,255,.2);border-radius:50%;
+  transform:translate(-50%,-50%);transition:width .5s,height .5s;
+}
+.fbtn:hover{box-shadow:0 0 30px var(--p),0 0 60px #ff00ff33;transform:scale(1.02)}
+.fbtn:hover::before{width:450px;height:450px}
+#fok{
+  display:none;text-align:center;padding:18px;
+  font-family:var(--fp);font-size:.68rem;
+  color:var(--c);text-shadow:var(--gc);animation:glitchTxt 2s infinite;
+}
+
+/* ═══════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════ */
+.btn{
+  display:inline-block;font-family:var(--fp);font-size:.6rem;
+  padding:13px 28px;background:transparent;border:2px solid var(--p);
+  color:var(--p);text-decoration:none;cursor:none;
+  letter-spacing:2px;position:relative;overflow:hidden;transition:color .3s;
+}
+.btn::after{
+  content:'';position:absolute;inset:0;background:var(--p);
+  transform:scaleX(0);transform-origin:right;transition:transform .3s;z-index:-1;
+}
+.btn:hover{color:#000;box-shadow:var(--gp)}.btn:hover::after{transform:scaleX(1);transform-origin:left}
+.btn-c{border-color:var(--c);color:var(--c)}.btn-c::after{background:var(--c)}.btn-c:hover{box-shadow:var(--gc)}
+.btn-d{background:#5865F2;border-color:#5865F2;color:#fff}.btn-d::after{background:#7289da}
+.btn-d:hover{box-shadow:0 0 20px #5865F2,0 0 40px #5865F233;color:#fff}
+
+/* ═══════════════════════════════════════
+   AUDIO WIDGET
+═══════════════════════════════════════ */
+#aud-widget{
+  position:fixed;bottom:18px;right:18px;z-index:8500;
+  display:flex;align-items:center;gap:9px;
+  background:rgba(0,0,0,.88);border:1px solid var(--p);
+  padding:9px 15px;cursor:none;font-family:var(--fm);
+  font-size:.6rem;color:var(--p);letter-spacing:1px;
+  transition:all .3s;
+}
+#aud-widget:hover{background:#ff00ff1a;box-shadow:var(--gp)}
+.abars{display:flex;align-items:flex-end;gap:2px;height:15px}
+.abar{width:3px;background:var(--p);animation:barb .55s ease-in-out infinite alternate}
+.abar:nth-child(2){animation-delay:.1s}.abar:nth-child(3){animation-delay:.2s}
+.abar:nth-child(4){animation-delay:.13s}.abar:nth-child(5){animation-delay:.06s}
+@keyframes barb{from{height:3px}to{height:15px}}
+.abars.off .abar{animation-play-state:paused;height:3px}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{
+  background:#000;border-top:3px solid var(--p);
+  padding:55px 20px 38px;text-align:center;position:relative;overflow:hidden;
+}
+footer::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--p),var(--c),var(--p),transparent);
+  box-shadow:var(--gp);
+}
+.flogo{
+  font-family:var(--fp);font-size:clamp(1.1rem,4vw,2.4rem);
+  color:var(--p);text-shadow:var(--gp);margin-bottom:18px;
+  animation:glitchTxt 6s infinite;
+}
+.fpio{font-family:var(--fm);font-size:.72rem;color:var(--c);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.fcopy{font-family:var(--fm);font-size:.58rem;color:#2a2a2a;letter-spacing:1px;margin-top:22px}
+
+/* ═══════════════════════════════════════
+   SCROLL FADE IN
+═══════════════════════════════════════ */
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.vis{opacity:1;transform:translateY(0)}
+
+/* ═══════════════════════════════════════
+   IMAGE DESCRIPTIONS SECTION
+═══════════════════════════════════════ */
+#imgdesc{background:#030008;border-top:1px solid #ff00ff22}
+.desc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.desc-card{
+  border:1px solid #ff00ff22;background:#0a0010;padding:22px;
+  transition:border-color .3s;
+}
+.desc-card:hover{border-color:#ff00ff55}
+.desc-card h3{font-family:var(--fp);font-size:.65rem;color:var(--p);margin-bottom:12px;line-height:1.6}
+.desc-card p{font-family:var(--fv);font-size:1.1rem;color:#999;line-height:1.6}
+.desc-tag{font-family:var(--fm);font-size:.58rem;color:var(--c);margin-top:10px;display:block}
+</style>
+
+<!-- SVG FILTERS for chromatic aberration -->
+<svg class="svg-filters" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="ca" x="-10%" y="-10%" width="120%" height="120%">
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red"/>
+      <feOffset in="red" dx="4" dy="0" result="redOff"/>
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green"/>
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue"/>
+      <feOffset in="blue" dx="-4" dy="0" result="blueOff"/>
+      <feBlend in="redOff" in2="green" mode="screen" result="rg"/>
+      <feBlend in="rg" in2="blueOff" mode="screen"/>
+    </filter>
+    <filter id="glitch-img">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02 0.8" numOctaves="1" seed="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+</head>
+<body>
+
+<!-- PARTICLES CANVAS -->
+<canvas id="cv"></canvas>
+<!-- CURSORS -->
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<!-- ══════════ ENTRY GATE ══════════ -->
+<div id="gate">
+  <div class="gate-title glitch chr">SIX SEX<br>ULTRA</div>
+  <div class="gate-warn">▼ ADVERTENCIA: VOLUMEN ALTO · PERREO EXTREMO · SIN FILTRO ▼</div>
+  <p style="font-family:var(--fm);font-size:.62rem;color:#ff00ff44;letter-spacing:2px;text-align:center">
+    PRIMERA WEB HISPANA DE FANS · 2026
+  </p>
+  <button id="gatebtn" onclick="enter()">⚡ ENTRAR A LA CUEVA ⚡</button>
+</div>
+
+<!-- AUDIO (reemplaza src con audio real de Six Sex) -->
+<audio id="aud" loop preload="auto">
+  <!--
+    OPCIÓN A — pon aquí la URL de un MP3 corto de Six Sex (loop de 30-60 seg):
+    <source src="https://tuservidor.com/sixsex-loop.mp3" type="audio/mpeg">
+
+    OPCIÓN B — usa un archivo local:
+    <source src="audio/sixsex-loop.mp3" type="audio/mpeg">
+
+    Si ninguno está disponible el Web Audio API generará un beat rave.
+  -->
+</audio>
+
+<!-- AUDIO WIDGET -->
+<div id="aud-widget" onclick="toggleAud()">
+  <div class="abars" id="abars">
+    <div class="abar"></div><div class="abar"></div><div class="abar"></div>
+    <div class="abar"></div><div class="abar"></div>
+  </div>
+  <span id="audlbl">SIX SEX RADIO</span>
+</div>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav>
+  <div class="nav-logo glitch g-slow">6SX ULTRA</div>
+  <div class="nav-links">
+    <a href="#welcome">CUEVA</a>
+    <a href="#bio">BIO</a>
+    <a href="#news">NEWS</a>
+    <a href="#gallery">GALERÍA</a>
+    <a href="#videos">VIDEOS</a>
+    <a href="#community">COMUNIDAD</a>
+    <a href="#proposals">PROPUESTAS</a>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<header id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-inner">
+    <div style="animation:horzGlitch 9s infinite">
+      <div class="h-six glitch chr">SIX SEX</div>
+      <div class="h-ultra g-slow glitch chr">ULTRA</div>
+    </div>
+    <p class="h-sub">Francisca Cuello · Ravetón · Caos</p>
+    <p class="h-pio">★ PRIMERA WEB PIONERA HISPANA DE FANS · 2026 ★</p>
+    <a href="#welcome" class="h-cta">↓ ENTRAR A LA ULTRA CUEVA ↓</a>
+  </div>
+</header>
+<style>
+@keyframes horzGlitch{
+  0%,88%,100%{clip-path:none;transform:none}
+  90%{clip-path:polygon(0 12%,100% 12%,100% 28%,0 28%);transform:translateX(9px)}
+  92%{clip-path:polygon(0 58%,100% 58%,100% 74%,0 74%);transform:translateX(-7px)}
+  94%{clip-path:polygon(0 82%,100% 82%,100% 93%,0 93%);transform:translateX(5px)}
+  96%{clip-path:none;transform:none}
+}
+</style>
+
+<!-- marquee 1 -->
+<div class="mq" style="background:var(--p)">
+  <div class="mq-inner">
+    <span style="color:#000">SIX SEX ULTRA ✦</span><span style="color:#000">FRANCISCA CUELLO ✦</span>
+    <span style="color:#000">ÁLBUM ULTRA ✦</span><span style="color:#000">RAVETÓN ✦</span>
+    <span style="color:#000">CUEVA HISPANA ✦</span><span style="color:#000">@SIXSEX_BB ✦</span>
+    <span style="color:#000">PERREO MÁXIMO ✦</span><span style="color:#000">LA REINA DEL CAOS ✦</span>
+    <span style="color:#000">SIX SEX ULTRA ✦</span><span style="color:#000">FRANCISCA CUELLO ✦</span>
+    <span style="color:#000">ÁLBUM ULTRA ✦</span><span style="color:#000">RAVETÓN ✦</span>
+    <span style="color:#000">CUEVA HISPANA ✦</span><span style="color:#000">@SIXSEX_BB ✦</span>
+    <span style="color:#000">PERREO MÁXIMO ✦</span><span style="color:#000">LA REINA DEL CAOS ✦</span>
+  </div>
+</div>
+
+<!-- ══════════ WELCOME ══════════ -->
+<section id="welcome">
+  <div class="inn">
+    <h2 class="stitle glitch">00 / BIENVENIDA A LA CUEVA</h2>
+    <div class="wbox">
+      <h2 class="chr">BIENVENIDES A LA ULTRA CUEVA</h2>
+      <p>
+        Este es el territorio sagrado de los fans de <strong style="color:var(--p)">Six Sex</strong>
+        —la primera web hispana dedicada a la artista más intensa y sin filtros de la escena under argentina.
+        Aquí se perrean certezas, se rompen géneros y se celebra el caos electrónico de
+        <strong style="color:var(--c)">Francisca Agustina Cuello</strong>.
+        <br><br>
+        Nada está censurado. Nada está moderado. Solo hay amor máximo y reverberación.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ BIO ══════════ -->
+<section id="bio">
+  <div class="inn">
+    <h2 class="stitle glitch">01 / QUIÉN ES SIX SEX</h2>
+    <div class="bio-grid">
+
+      <div>
+        <div class="bio-frame">
+          <!--
+            Reemplaza este placeholder con:
+            <img class="bio-img" src="URL_FOTO_SIXSEX" alt="Six Sex" />
+          -->
+          <div class="bio-img" style="aspect-ratio:3/4;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#2d003a,#000814,#1a003a)">
+            <span style="font-size:5rem;filter:drop-shadow(0 0 24px var(--p))">🖤</span>
+            <span style="font-family:var(--fp);font-size:.48rem;color:#ff00ff66;text-align:center;padding:0 20px;line-height:2;margin-top:12px">
+              COLOCA AQUÍ TU<br>FOTO DE SIX SEX<br><br>600×800px ideal
+            </span>
+          </div>
+        </div>
+        <div style="margin-top:14px">
+          <span class="tag">ravetón</span><span class="tag">electrónica</span>
+          <span class="tag">reguetón</span><span class="tag">argentina</span>
+          <span class="tag">perreo</span><span class="tag">sintetizadores</span>
+          <span class="tag">rave</span><span class="tag">ULTRA 2026</span>
+          <span class="tag">sin filtro</span><span class="tag">techno</span>
+        </div>
+      </div>
+
+      <div>
+        <p class="btext">
+          <strong>Francisca Agustina Cuello</strong>, nacida en <em>Villa Tesei, Buenos Aires</em>,
+          es la arquitecta del caos que el reguetón nunca supo que necesitaba.
+          Six Sex no es un nombre artístico: es una declaración de principios.
+        </p>
+        <p class="btext">
+          Mezcla <strong>reguetón crudo</strong>, <em>techno de subsuelo</em> y
+          <strong>perreo sin disculpas</strong> con letras que hablan de deseo, poder, cuerpo y destrucción creativa.
+          Cada beat es una amenaza. Cada letra es una promesa.
+        </p>
+        <p class="btext">
+          En <strong>2026</strong> lanza <em>ULTRA</em>, su álbum debut que promete reescribir
+          las reglas del ravetón hispanoamericano. La preescucha del <strong>25 de mayo</strong>
+          fue una experiencia multisensorial que reunió a la comunidad under en una sola frecuencia.
+        </p>
+        <p class="btext">
+          Sigue sus movimientos en <strong>@sixsex_bb</strong>.
+          Todo lo que no ves ahí te lo contamos acá.
+        </p>
+
+        <div class="stats">
+          <div class="sbox fade-in"><span class="sn">∞</span><span class="sl">FANS ULTRA</span></div>
+          <div class="sbox fade-in"><span class="sn">12</span><span class="sl">TRACKS EN ULTRA</span></div>
+          <div class="sbox fade-in"><span class="sn">01</span><span class="sl">ÁLBUM 2026</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- marquee 2 -->
+<div class="mq" style="background:var(--c)">
+  <div class="mq-inner rev">
+    <span style="color:#000">ULTRA ALBUM ✦</span><span style="color:#000">25 MAYO PREESCUCHA ✦</span>
+    <span style="color:#000">SIX SEX ARGENTINA ✦</span><span style="color:#000">CYBER RAVE QUEEN ✦</span>
+    <span style="color:#000">NO HAY FILTRO ✦</span><span style="color:#000">PRIMERA CUEVA HISPANA ✦</span>
+    <span style="color:#000">ULTRA ALBUM ✦</span><span style="color:#000">25 MAYO PREESCUCHA ✦</span>
+    <span style="color:#000">SIX SEX ARGENTINA ✦</span><span style="color:#000">CYBER RAVE QUEEN ✦</span>
+    <span style="color:#000">NO HAY FILTRO ✦</span><span style="color:#000">PRIMERA CUEVA HISPANA ✦</span>
+  </div>
+</div>
+
+<!-- ══════════ NEWS ══════════ -->
+<section id="news">
+  <div class="inn">
+    <h2 class="stitle glitch">02 / ÚLTIMAS NOTICIAS</h2>
+
+    <div class="cdbox">
+      <p class="cdlbl">⚡ CUENTA REGRESIVA — ÁLBUM ULTRA ⚡</p>
+      <div id="cd">
+        <div class="cu"><div class="cn" id="cdd">00</div><div class="clb">DÍAS</div></div>
+        <div class="cu"><div class="cn" id="cdh">00</div><div class="clb">HORAS</div></div>
+        <div class="cu"><div class="cn" id="cdm">00</div><div class="clb">MINUTOS</div></div>
+        <div class="cu"><div class="cn" id="cds">00</div><div class="clb">SEGUNDOS</div></div>
+      </div>
+    </div>
+
+    <div class="ngrid">
+      <div class="ncard fade-in">
+        <div class="nbadge">🔥 ÁLBUM</div>
+        <div class="ndate">15 JUNIO 2026</div>
+        <div class="ntitle">ULTRA — EL ÁLBUM DEBUT DE SIX SEX</div>
+        <p class="nbody">Doce tracks de ravetón puro. Producido sin concesiones. La era ULTRA arranca y no hay vuelta atrás.</p>
+      </div>
+      <div class="ncard fade-in">
+        <div class="nbadge" style="background:var(--c);color:#000">⚡ EVENTO</div>
+        <div class="ndate">25 MAYO 2026</div>
+        <div class="ntitle">PREESCUCHA ULTRA — NOCHE HISTÓRICA</div>
+        <p class="nbody">Sesión exclusiva con instalación audiovisual y performance en vivo. Una noche histórica del under hispano.</p>
+      </div>
+      <div class="ncard fade-in">
+        <div class="nbadge" style="background:var(--y);color:#000">★ REDES</div>
+        <div class="ndate">MAYO 2026</div>
+        <div class="ntitle">SIGUE TODOS LOS CANALES</div>
+        <p class="nbody"><strong>@sixsex_bb</strong> en Instagram · Management <strong>@1000x100to</strong>. Activa las notificaciones.</p>
+      </div>
+      <div class="ncard fade-in">
+        <div class="nbadge" style="background:var(--r);color:#fff">♥ FANS</div>
+        <div class="ndate">2026</div>
+        <div class="ntitle">ESTA WEB: PRIMERA CUEVA HISPANA</div>
+        <p class="nbody">La primera plataforma organizada de fans hispanohablantes de Six Sex. Sin fines de lucro. Con todo el amor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GALLERY ══════════ -->
+<section id="gallery">
+  <div class="inn">
+    <h2 class="stitle glitch">03 / GALERÍA ULTRA</h2>
+    <div class="gfilters">
+      <button class="gfbtn on">TODO</button>
+      <button class="gfbtn">FOTOS OFICIALES</button>
+      <button class="gfbtn">EDITS FANS</button>
+      <button class="gfbtn">LIVES</button>
+      <button class="gfbtn">ARTE</button>
+    </div>
+    <div class="ggrid">
+      <!--
+        Para añadir fotos reales, reemplaza cada <div class="ph">...</div>
+        con: <img src="URL_FOTO" alt="descripción" />
+      -->
+      <div class="gi fade-in"><div class="ph"><span>🖤</span>FOTO 01 · PREESCUCHA</div><div class="gi-lbl">PREESCUCHA ULTRA · MAY 2026</div></div>
+      <div class="gi fade-in"><div class="ph"><span>💜</span>FOTO 02 · EDIT FAN</div><div class="gi-lbl">EDIT FAN ART</div></div>
+      <div class="gi fade-in"><div class="ph"><span>⚡</span>FOTO 03 · LIVE SET</div><div class="gi-lbl">LIVE @ BOLICHE</div></div>
+      <div class="gi fade-in"><div class="ph"><span>🌸</span>FOTO 04 · SESIÓN</div><div class="gi-lbl">SESIÓN ÁLBUM ULTRA</div></div>
+      <div class="gi fade-in"><div class="ph"><span>🔮</span>FOTO 05 · BACKSTAGE</div><div class="gi-lbl">BACKSTAGE</div></div>
+      <div class="gi fade-in"><div class="ph"><span>💫</span>FOTO 06 · FAN EDIT</div><div class="gi-lbl">FAN DIGITAL ART</div></div>
+      <div class="gi fade-in"><div class="ph"><span>📸</span>FOTO 07 · PRENSA</div><div class="gi-lbl">PRESS KIT 2026</div></div>
+      <div class="gi fade-in"><div class="ph"><span>🎭</span>FOTO 08 · COVER</div><div class="gi-lbl">COVER ÁLBUM ULTRA</div></div>
+    </div>
+    <p style="font-family:var(--fm);font-size:.6rem;color:#ff00ff33;margin-top:18px;letter-spacing:1px">
+      // Reemplaza los div.ph con &lt;img src="URL"&gt; para añadir fotos reales //
+    </p>
+  </div>
+</section>
+
+<!-- ══════════ VIDEOS ══════════ -->
+<section id="videos">
+  <div class="inn">
+    <h2 class="stitle glitch">04 / VIDEOS & LIVES</h2>
+    <div class="vgrid">
+      <div class="vwrap fade-in">
+        <!--
+          Reemplaza VIDEO_ID con el ID real de YouTube de Six Sex.
+          Ejemplo: youtube.com/watch?v=dQw4w9WgXcQ → ID = dQw4w9WgXcQ
+        -->
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_1?rel=0&modestbranding=1"
+          title="Six Sex Video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+        <div class="vcap">SIX SEX — VIDEO OFICIAL · ULTRA</div>
+      </div>
+      <div class="vwrap fade-in">
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_2?rel=0&modestbranding=1"
+          title="Six Sex Live" allow="accelerometer;autoplay;clipboard-write;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+        <div class="vcap">SIX SEX — LIVE SET · PREESCUCHA</div>
+      </div>
+    </div>
+    <p style="font-family:var(--fm);font-size:.6rem;color:#ff00ff33;margin-top:18px;letter-spacing:1px">
+      // Reemplaza VIDEO_ID_1 y VIDEO_ID_2 con los IDs reales de YouTube //
+    </p>
+  </div>
+</section>
+
+<!-- ══════════ COMMUNITY ══════════ -->
+<section id="community">
+  <div class="inn">
+    <h2 class="stitle glitch">05 / COMUNIDAD ULTRA</h2>
+    <div class="ccgrid">
+      <div class="dbox fade-in">
+        <span class="dico">⚡</span>
+        <div class="dtitle">SERVIDOR DE FANS ULTRA</div>
+        <p class="ddesc">Canal oficial de fans hispanohablantes. Noticias exclusivas, edits, watchparties y acceso anticipado.</p>
+        <!-- Reemplaza la URL con tu invite de Discord real -->
+        <a href="https://discord.gg/TU-INVITE" target="_blank" rel="noopener" class="btn btn-d">⚡ UNIRSE AL DISCORD</a>
+        <p style="font-family:var(--fm);font-size:.56rem;color:#5865F244;margin-top:14px;letter-spacing:1px">
+          // Reemplaza la URL con tu invite de Discord //
+        </p>
+      </div>
+      <div class="slinks fade-in">
+        <a href="https://instagram.com/sixsex_bb" target="_blank" rel="noopener" class="sl-a">
+          <span class="sl-ico">📸</span>
+          <div><span class="sl-handle">@sixsex_bb</span><span class="sl-name">INSTAGRAM OFICIAL</span></div>
+        </a>
+        <a href="https://instagram.com/1000x100to" target="_blank" rel="noopener" class="sl-a">
+          <span class="sl-ico">🎛️</span>
+          <div><span class="sl-handle">@1000x100to</span><span class="sl-name">MANAGEMENT & SELLO</span></div>
+        </a>
+        <a href="https://x.com/sixsex_bb" target="_blank" rel="noopener" class="sl-a">
+          <span class="sl-ico">🐦</span>
+          <div><span class="sl-handle">@sixsex_bb</span><span class="sl-name">X / TWITTER</span></div>
+        </a>
+        <a href="https://tiktok.com/@sixsex_bb" target="_blank" rel="noopener" class="sl-a">
+          <span class="sl-ico">🎵</span>
+          <div><span class="sl-handle">@sixsex_bb</span><span class="sl-name">TIKTOK</span></div>
+        </a>
+        <a href="https://open.spotify.com/search/six%20sex" target="_blank" rel="noopener" class="sl-a">
+          <span class="sl-ico">🎧</span>
+          <div><span class="sl-handle">SIX SEX</span><span class="sl-name">SPOTIFY</span></div>
+        </a>
+        <a href="https://youtube.com/@sixsex" target="_blank" rel="noopener" class="sl-a">
+          <span class="sl-ico">▶️</span>
+          <div><span class="sl-handle">SIX SEX</span><span class="sl-name">YOUTUBE</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROPOSALS ══════════ -->
+<section id="proposals">
+  <div class="inn">
+    <h2 class="stitle glitch">06 / PROPUESTAS A SIX SEX</h2>
+    <div class="fwrap">
+      <form id="pform" onsubmit="submitForm(event)">
+        <div class="fg">
+          <label class="flbl">Nombre / apodo de fan</label>
+          <input type="text" class="fi" placeholder="Tu nombre ultra..." required/>
+        </div>
+        <div class="fg">
+          <label class="flbl">Instagram / red social</label>
+          <input type="text" class="fi" placeholder="@tuusuario"/>
+        </div>
+        <div class="fg">
+          <label class="flbl">Tipo de propuesta</label>
+          <select class="fsel fi">
+            <option value="">Selecciona...</option>
+            <option>Idea para videoclip</option>
+            <option>Fan art / diseño</option>
+            <option>Colaboración musical</option>
+            <option>Propuesta de evento</option>
+            <option>Outfit / estilismo</option>
+            <option>Mensaje de amor extremo</option>
+            <option>Otra cosa ultra</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="flbl">Tu propuesta</label>
+          <textarea class="fta" placeholder="Escribe tu propuesta, idea, mensaje de amor sin filtro... Todo vale en la cueva." required></textarea>
+        </div>
+        <button type="submit" class="fbtn">⚡ TRANSMITIR A SIX SEX ⚡</button>
+      </form>
+      <div id="fok">
+        ✦ TRANSMISIÓN RECIBIDA ✦<br><br>
+        La cueva lo procesará.<br>Six Sex lo verá.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- marquee 3 -->
+<div class="mq" style="background:linear-gradient(90deg,var(--p),#8800cc,var(--p))">
+  <div class="mq-inner">
+    <span style="color:#000">♥ SIX SEX ♥</span><span style="color:#000">ULTRA 2026 ♥</span>
+    <span style="color:#000">LA REINA ♥</span><span style="color:#000">FRANCISCA CUELLO ♥</span>
+    <span style="color:#000">SIN FILTRO ♥</span><span style="color:#000">PRIMERA CUEVA HISPANA ♥</span>
+    <span style="color:#000">♥ SIX SEX ♥</span><span style="color:#000">ULTRA 2026 ♥</span>
+    <span style="color:#000">LA REINA ♥</span><span style="color:#000">FRANCISCA CUELLO ♥</span>
+    <span style="color:#000">SIN FILTRO ♥</span><span style="color:#000">PRIMERA CUEVA HISPANA ♥</span>
+  </div>
+</div>
+
+<!-- ══════════ IMAGE DESCRIPTIONS ══════════ -->
+<section id="imgdesc">
+  <div class="inn">
+    <h2 class="stitle" style="color:var(--c);text-shadow:var(--gc)">07 / GUÍA DE IMÁGENES PARA DISEÑAR</h2>
+    <p style="font-family:var(--fv);font-size:1.2rem;color:#888;margin-bottom:30px">
+      Descripciones detalladas para generar o encargar el logo, fondo y assets visuales con IA o diseñadores.
+    </p>
+    <div class="desc-grid">
+
+      <div class="desc-card fade-in">
+        <h3>LOGO PRINCIPAL "SIX SEX ULTRA"</h3>
+        <p>
+          Tipografía pixel/bitmap fragmentada, estilo glitch extremo. Las letras parecen romperse y
+          recomponerse: algunas piezas desplazadas 4-8px en rojo y cyan (aberración cromática fuerte).
+          Color base: magenta neón (#ff00ff) sobre negro puro. Hay trozos de letra que "caen" o
+          flotan fuera de lugar. El texto irradia glow difuso rosa. Fondo transparente para overlay.
+        </p>
+        <span class="desc-tag">Prompt IA: "glitch pixel art logo text SIX SEX ULTRA, broken letters, chromatic aberration red cyan, neon magenta glow, black background, cyberpunk aesthetic"</span>
+      </div>
+
+      <div class="desc-card fade-in">
+        <h3>FONDO HERO PRINCIPAL</h3>
+        <p>
+          Fondo ultraoscuro (#050505) con gradiente radial magenta muy desaturado desde el centro.
+          Grid de líneas finas en rosa neón muy transparente (opacidad 5-8%) formando cuadrícula.
+          Scanlines horizontales sutiles. Partículas de luz magenta y cyan flotando. Sin imágenes
+          figurativas: abstracto digital puro. Sensación de rave/boliche en pantalla de monitor CRT.
+        </p>
+        <span class="desc-tag">Prompt IA: "dark cyber rave background, neon grid lines, scanlines, floating particles magenta cyan, CRT monitor aesthetic, ultra dark, minimal figurative"</span>
+      </div>
+
+      <div class="desc-card fade-in">
+        <h3>FOTO ARTÍSTICA — RETRATO SIX SEX</h3>
+        <p>
+          Retrato a 3/4 de Francisca Cuello, iluminación de contraluz neón magenta fuerte desde atrás.
+          Piel con brillo sudoroso, actitud desafiante mirando a cámara. Edición con aberración
+          cromática leve, alto contraste, saturación extrema. Fondo negro con destellos de luz.
+          Estética editorial rave argentino underground. Aspect ratio 3:4 vertical.
+        </p>
+        <span class="desc-tag">Prompt IA: "portrait photo, neon magenta backlight, high contrast, chromatic aberration, rave underground argentina, defiant gaze, editorial, 3:4 vertical"</span>
+      </div>
+
+      <div class="desc-card fade-in">
+        <h3>COVER ÁLBUM ULTRA</h3>
+        <p>
+          Diseño cuadrado 1:1. El texto "ULTRA" ocupa casi todo el frame en tipografía grotesca bold
+          muy comprimida, color blanco con glow rosa que se sangra en los bordes. Detrás, textura
+          metálica o piel de cerca muy procesada. Aberración cromática intensa. Bordes fragmentados
+          glitch. Paleta: negro + magenta + blanco. Sensación de peso visual máximo.
+        </p>
+        <span class="desc-tag">Prompt IA: "album cover ULTRA bold grotesque text, neon pink glow bleed, glitch edges, chromatic aberration, metallic texture, high impact, square format"</span>
+      </div>
+
+      <div class="desc-card fade-in">
+        <h3>FAN ART — EDITS ESTILO CUEVA</h3>
+        <p>
+          Collage digital: foto de Six Sex intervenida con overlays de glitch, scanlines, texto
+          fragmentado en tipografía pixel flotando alrededor. Manchas de color magenta y cyan.
+          Estrellas de 8 puntas de neón. Fondo negro. Alta saturación. Puede incluir
+          elementos de perreo, notas musicales distorsionadas, emojis de corazón roto 🖤.
+        </p>
+        <span class="desc-tag">Prompt IA: "digital collage fan art, glitch overlay, pixel text fragments, neon magenta cyan, scanlines, 8-point stars, dark background, high saturation cyberpunk"</span>
+      </div>
+
+      <div class="desc-card fade-in">
+        <h3>CURSOR CUSTOM & UI ICONS</h3>
+        <p>
+          Cursor: corazón roto 🖤 de 24×24px en magenta neón, con glow difuso rosa.
+          Íconos de sección: símbolos pixel art de 16×16px — altavoz, estrella rota,
+          calavera con corona, relámpago. Todos en magenta sobre fondo transparente.
+          Estilo 1-bit pero con glow effect aplicado en CSS.
+        </p>
+        <span class="desc-tag">Prompt IA: "pixel art icons 16px, broken heart speaker star skull lightning, neon magenta, transparent background, 1-bit retro cyber style"</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="flogo glitch">SIX SEX ULTRA</div>
+  <p class="fpio">★ PRIMERA WEB PIONERA DE FANS HISPANOHABLANTES ★</p>
+  <p class="fpio" style="color:#ff00ff55;margin-top:6px">Hecha con amor, perreo maximalista y caos electrónico · 2026</p>
+  <p style="margin-top:26px">
+    <a href="https://instagram.com/sixsex_bb" target="_blank" rel="noopener"
+      style="color:var(--p);text-decoration:none;font-family:var(--fp);font-size:.55rem;margin:0 10px">@sixsex_bb</a>
+    <a href="https://instagram.com/1000x100to" target="_blank" rel="noopener"
+      style="color:var(--c);text-decoration:none;font-family:var(--fp);font-size:.55rem;margin:0 10px">@1000x100to</a>
+  </p>
+  <p class="fcopy">Sitio de fans no oficial · Sin fines de lucro · Contenido © sus respectivos propietarios</p>
+</footer>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+/* ─── CURSOR ─── */
+const cur = document.getElementById('cur');
+const cur2 = document.getElementById('cur2');
+let mx=0,my=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+  setTimeout(()=>{cur2.style.left=mx+'px';cur2.style.top=my+'px'},110);
+});
+document.querySelectorAll('a,button,.gi,.sbox,.ncard,.slinks').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+});
+
+/* ─── PARTICLES ─── */
+const cv=document.getElementById('cv');
+const cx=cv.getContext('2d');
+let W,H,pts=[];
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+resize();addEventListener('resize',resize);
+class P{
+  reset(){
+    this.x=Math.random()*W;this.y=Math.random()*H;
+    this.r=Math.random()*2.2+.4;
+    this.vx=(Math.random()-.5)*.5;this.vy=(Math.random()-.5)*.5-.18;
+    this.a=Math.random()*.55+.1;
+    this.col=Math.random()>.5?'#ff00ff':'#00ffff';
+  }
+  constructor(){this.reset()}
+  tick(){
+    this.x+=this.vx;this.y+=this.vy;
+    if(this.y<-6||this.x<-6||this.x>W+6)this.reset();
+  }
+  draw(){
+    cx.save();cx.globalAlpha=this.a;cx.fillStyle=this.col;
+    cx.shadowBlur=9;cx.shadowColor=this.col;
+    cx.beginPath();cx.arc(this.x,this.y,this.r,0,Math.PI*2);cx.fill();cx.restore();
+  }
+}
+for(let i=0;i<180;i++)pts.push(new P());
+document.addEventListener('mousemove',e=>{
+  if(Math.random()>.82){
+    const p=new P();p.x=e.clientX;p.y=e.clientY;
+    p.vx=(Math.random()-.5)*2.5;p.vy=(Math.random()-.5)*2.5;
+    p.r=Math.random()*3+1;p.a=.85;
+    pts.push(p);if(pts.length>380)pts.splice(0,60);
+  }
+});
+(function loop(){cx.clearRect(0,0,W,H);pts.forEach(p=>{p.tick();p.draw()});requestAnimationFrame(loop)})();
+
+/* ─── WEB AUDIO API (fallback beat when no external audio) ─── */
+let actx=null,audNodes=[];
+function startWebAudio(){
+  if(actx)return;
+  actx=new(window.AudioContext||window.webkitAudioContext)();
+  // Sub-bass kick
+  function kick(){
+    const g=actx.createGain();g.gain.setValueAtTime(1.2,actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.4);
+    const o=actx.createOscillator();o.type='sine';
+    o.frequency.setValueAtTime(180,actx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(30,actx.currentTime+.35);
+    o.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+.4);
+  }
+  // Hi-hat
+  function hat(){
+    const buf=actx.createBuffer(1,actx.sampleRate*.08,actx.sampleRate);
+    const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*.4;
+    const s=actx.createBufferSource();s.buffer=buf;
+    const f=actx.createBiquadFilter();f.type='highpass';f.frequency.value=8000;
+    const g=actx.createGain();g.gain.setValueAtTime(.4,actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.08);
+    s.connect(f);f.connect(g);g.connect(actx.destination);s.start();
+  }
+  // Rave synth arp
+  const notes=[220,277,330,415,440,554,660];
+  let ni=0;
+  function synth(){
+    const o=actx.createOscillator();o.type='sawtooth';
+    const g=actx.createGain();g.gain.setValueAtTime(.12,actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.18);
+    const f=actx.createBiquadFilter();f.type='lowpass';f.frequency.value=900;f.Q.value=8;
+    o.frequency.value=notes[ni%notes.length]*2;ni++;
+    o.connect(f);f.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+.18);
+  }
+  // Pattern: kick on 1 & 3, hat on every beat, synth offbeats
+  let beat=0;
+  setInterval(()=>{
+    if(beat%4===0||beat%4===2)kick();
+    hat();
+    if(beat%2===1)synth();
+    beat++;
+  },250); // 240bpm rave
+}
+
+/* ─── ENTRY GATE ─── */
+const aud=document.getElementById('aud');
+function enter(){
+  document.getElementById('gate').classList.add('out');
+  aud.volume=.38;
+  const p=aud.play();
+  if(p&&p.catch)p.catch(()=>{});
+  // If audio element has no src, fallback to Web Audio
+  setTimeout(()=>{
+    if(aud.paused||aud.src===''||aud.src===window.location.href){
+      startWebAudio();
+    }
+  },800);
+}
+
+/* ─── AUDIO WIDGET ─── */
+let audOn=false;
+const abars=document.getElementById('abars');
+const audlbl=document.getElementById('audlbl');
+function toggleAud(){
+  if(audOn){
+    aud.pause();if(actx)actx.suspend();
+    abars.classList.add('off');audlbl.textContent='AUDIO OFF';audOn=false;
+  }else{
+    const p=aud.play();if(p&&p.catch)p.catch(()=>{});
+    if(actx)actx.resume();
+    abars.classList.remove('off');audlbl.textContent='SIX SEX RADIO';audOn=true;
+  }
+}
+aud.addEventListener('play',()=>{audOn=true;abars.classList.remove('off');audlbl.textContent='SIX SEX RADIO'});
+aud.addEventListener('pause',()=>{audOn=false;abars.classList.add('off');audlbl.textContent='AUDIO OFF'});
+
+/* ─── COUNTDOWN (álbum ULTRA, 15 junio 2026) ─── */
+const TARGET=new Date('2026-06-15T00:00:00');
+function tick(){
+  const now=new Date(),d=TARGET-now;
+  if(d<=0){['cdd','cdh','cdm','cds'].forEach(id=>document.getElementById(id).textContent='00');return}
+  document.getElementById('cdd').textContent=String(Math.floor(d/864e5)).padStart(2,'0');
+  document.getElementById('cdh').textContent=String(Math.floor(d%864e5/36e5)).padStart(2,'0');
+  document.getElementById('cdm').textContent=String(Math.floor(d%36e5/6e4)).padStart(2,'0');
+  document.getElementById('cds').textContent=String(Math.floor(d%6e4/1e3)).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+
+/* ─── GALLERY FILTER ─── */
+document.querySelectorAll('.gfbtn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.gfbtn').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+  });
+});
+
+/* ─── FORM ─── */
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('pform').style.display='none';
+  document.getElementById('fok').style.display='block';
+}
+
+/* ─── SCROLL FADE IN ─── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(en=>{if(en.isIntersecting)en.target.classList.add('vis')});
+},{threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+/* ─── RANDOM GLITCH PULSES ─── */
+setInterval(()=>{
+  const gs=document.querySelectorAll('.glitch');
+  const g=gs[Math.floor(Math.random()*gs.length)];
+  if(!g)return;
+  g.style.transform=`translateX(${(Math.random()-.5)*10}px) skewX(${(Math.random()-.5)*5}deg)`;
+  setTimeout(()=>g.style.transform='',90);
+},1400);
+
+// Body RGB shift flicker
+setInterval(()=>{
+  if(Math.random()>.68){
+    document.body.style.filter=`hue-rotate(${Math.random()*8}deg) brightness(${1+Math.random()*.08})`;
+    setTimeout(()=>document.body.style.filter='',55);
+  }
+},4500);
+</script>
+</body>
+</html>
