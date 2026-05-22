@@ -545,6 +545,51 @@ footer::before{
 .fade-in.vis{opacity:1;transform:translateY(0)}
 
 /* ═══════════════════════════════════════
+   GATE FAN NUMBER
+═══════════════════════════════════════ */
+#gate-fan{display:none;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.fan-lbl{font-family:var(--fm);font-size:.65rem;color:var(--c);letter-spacing:4px;text-transform:uppercase}
+.fan-num-big{
+  font-family:var(--fp);font-size:clamp(3rem,10vw,5.5rem);
+  color:var(--p);text-shadow:var(--gp);line-height:1;
+  animation:glitchTxt 1s infinite;
+}
+.gate-loading{
+  font-family:var(--fm);font-size:.65rem;color:#ff00ff66;
+  letter-spacing:4px;animation:blink .5s step-end infinite;
+}
+
+/* ═══════════════════════════════════════
+   KONAMI — MODO ULTRA (secreto)
+═══════════════════════════════════════ */
+#konami{
+  position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:99990;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  gap:28px;padding:24px;text-align:center;
+  opacity:0;pointer-events:none;transition:opacity .4s;overflow-y:auto;
+}
+#konami.on{opacity:1;pointer-events:all;animation:kpulse .3s steps(1) 12}
+@keyframes kpulse{0%{background:rgba(0,0,0,.95)}50%{background:rgba(255,0,255,.2)}}
+.konami-title{
+  font-family:var(--fp);font-size:clamp(1.4rem,6vw,3rem);
+  color:var(--p);text-shadow:var(--gp);
+  animation:glitchTxt .9s infinite;line-height:1.5;
+}
+.manifiesto{
+  max-width:580px;font-family:var(--fv);font-size:1.4rem;
+  color:#ddd;line-height:1.9;
+  border:1px solid #ff00ff44;padding:28px;background:#0d0012;
+}
+.manifiesto strong{color:var(--p)}.manifiesto em{color:var(--c);font-style:normal}
+.konami-hint{font-family:var(--fm);font-size:.58rem;color:#ff00ff44;letter-spacing:2px}
+.konami-close{
+  font-family:var(--fp);font-size:.55rem;background:transparent;
+  border:2px solid var(--p);color:var(--p);padding:10px 22px;
+  cursor:none;letter-spacing:2px;transition:all .3s;
+}
+.konami-close:hover{background:var(--p);color:#000}
+
+/* ═══════════════════════════════════════
    IMAGE DESCRIPTIONS SECTION
 ═══════════════════════════════════════ */
 #imgdesc{background:#030008;border-top:1px solid #ff00ff22}
@@ -595,6 +640,35 @@ footer::before{
     PRIMERA WEB HISPANA DE FANS · 2026
   </p>
   <button id="gatebtn" onclick="enter()">⚡ ENTRAR A LA CUEVA ⚡</button>
+  <!-- Fan number reveal (aparece tras pulsar Entrar) -->
+  <div id="gate-fan">
+    <span class="fan-lbl">ERES LA/EL FAN Nº</span>
+    <div class="fan-num-big glitch" id="gate-fan-num">0000</div>
+    <span class="fan-lbl" style="color:#ff00ff55;font-size:.55rem;letter-spacing:3px">DE LA CUEVA HISPANA · SPAIN EDITION 2026</span>
+  </div>
+</div>
+
+<!-- ══════════ MODO ULTRA (Konami code secret) ══════════ -->
+<div id="konami">
+  <div class="konami-title">MODO<br>ULTRA<br>ACTIVADO</div>
+  <div class="manifiesto">
+    <strong>MANIFIESTO ULTRA Nº001</strong><br>
+    <em>Fans hispanos de Six Sex · España · 2026</em>
+    <br><br>
+    Nosotres existimos porque ella existe.<br>
+    Somos el ruido que no para.<br>
+    El perreo que cruza fronteras.<br>
+    El amor que Six Sex no pidió<br>
+    pero que tampoco vamos a contener.<br>
+    <br>
+    <strong>FRANCISCA CUELLO</strong>: te vemos desde España.<br>
+    Te vemos desde donde sea.<br>
+    <em>La cueva es tuya.</em>
+  </div>
+  <p class="konami-hint">↑ ↑ ↓ ↓ ← → ← → B A — SECRETO ULTRA DESBLOQUEADO</p>
+  <button class="konami-close" onclick="document.getElementById('konami').classList.remove('on')">
+    CERRAR
+  </button>
 </div>
 
 <!-- AUDIO (reemplaza src con audio real de Six Sex) -->
@@ -1058,22 +1132,20 @@ footer::before{
 ══════════════════════════════════════ -->
 <script>
 /* ─── CURSOR ─── */
-const cur = document.getElementById('cur');
-const cur2 = document.getElementById('cur2');
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
 let mx=0,my=0;
 document.addEventListener('mousemove',e=>{
   mx=e.clientX;my=e.clientY;
   cur.style.left=mx+'px';cur.style.top=my+'px';
   setTimeout(()=>{cur2.style.left=mx+'px';cur2.style.top=my+'px'},110);
 });
-document.querySelectorAll('a,button,.gi,.sbox,.ncard,.slinks').forEach(el=>{
+document.querySelectorAll('a,button,.gi,.sbox,.ncard').forEach(el=>{
   el.addEventListener('mouseenter',()=>cur.classList.add('big'));
   el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
 });
 
 /* ─── PARTICLES ─── */
-const cv=document.getElementById('cv');
-const cx=cv.getContext('2d');
+const cv=document.getElementById('cv'),cx=cv.getContext('2d');
 let W,H,pts=[];
 function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight}
 resize();addEventListener('resize',resize);
@@ -1086,10 +1158,7 @@ class P{
     this.col=Math.random()>.5?'#ff00ff':'#00ffff';
   }
   constructor(){this.reset()}
-  tick(){
-    this.x+=this.vx;this.y+=this.vy;
-    if(this.y<-6||this.x<-6||this.x>W+6)this.reset();
-  }
+  tick(){this.x+=this.vx;this.y+=this.vy;if(this.y<-6||this.x<-6||this.x>W+6)this.reset()}
   draw(){
     cx.save();cx.globalAlpha=this.a;cx.fillStyle=this.col;
     cx.shadowBlur=9;cx.shadowColor=this.col;
@@ -1107,77 +1176,176 @@ document.addEventListener('mousemove',e=>{
 });
 (function loop(){cx.clearRect(0,0,W,H);pts.forEach(p=>{p.tick();p.draw()});requestAnimationFrame(loop)})();
 
-/* ─── WEB AUDIO API (fallback beat when no external audio) ─── */
-let actx=null,audNodes=[];
-function startWebAudio(){
-  if(actx)return;
-  actx=new(window.AudioContext||window.webkitAudioContext)();
-  // Sub-bass kick
+/* ═══════════════════════════════════════
+   WEB AUDIO: vocal synth "aaah aaah" + rave beat
+   (suena incluso sin archivo de audio externo)
+═══════════════════════════════════════ */
+let actx=null;
+
+/* Genera una reverb sintética de sala */
+function makeReverb(c){
+  const conv=c.createConvolver();
+  const len=c.sampleRate*2.2;
+  const buf=c.createBuffer(2,len,c.sampleRate);
+  for(let ch=0;ch<2;ch++){
+    const d=buf.getChannelData(ch);
+    for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.8);
+  }
+  conv.buffer=buf;return conv;
+}
+
+/* Síntesis vocal formántica — el "aaah" de Six Sex */
+function synthScream(startTime,pitch,vol,dur){
+  if(!actx)return;
+  const now=startTime;
+  // Dos osciladores sawtooth levemente desafinados (corcho vocal)
+  const o1=actx.createOscillator(),o2=actx.createOscillator();
+  o1.type='sawtooth';o2.type='sawtooth';
+  o1.frequency.value=pitch;o2.frequency.value=pitch*1.007;
+  // Vibrato (6 Hz, profundidad 2.5%) — femenino expresivo
+  const vib=actx.createOscillator(),vibG=actx.createGain();
+  vib.frequency.value=6;vibG.gain.value=pitch*.025;
+  vib.connect(vibG);vibG.connect(o1.frequency);vibG.connect(o2.frequency);
+  // Envelope de pitch: sube rápido, luego baja suavemente
+  o1.frequency.setValueAtTime(pitch*.9,now);
+  o1.frequency.linearRampToValueAtTime(pitch*1.07,now+.1);
+  o1.frequency.linearRampToValueAtTime(pitch,now+dur*.5);
+  o1.frequency.linearRampToValueAtTime(pitch*.96,now+dur);
+  // Filtros formánticos para la vocal "aaah" abierta
+  const f1=actx.createBiquadFilter(),f2=actx.createBiquadFilter();
+  f1.type='bandpass';f1.frequency.value=850;f1.Q.value=4.5;  // F1 vocal
+  f2.type='bandpass';f2.frequency.value=1250;f2.Q.value=3;   // F2 vocal
+  const fmix=actx.createGain();fmix.gain.value=.6;
+  // Distorsión suave para la aspereza raw
+  const dist=actx.createWaveShaper();
+  const crv=new Float32Array(512);
+  for(let i=0;i<512;i++){const x=(i/256)-1;crv[i]=x<0?-Math.pow(-x,.7):Math.pow(x,.7)}
+  dist.curve=crv;
+  // Envelope de volumen: ataque rápido, sustain, caída lenta
+  const gain=actx.createGain();
+  gain.gain.setValueAtTime(0,now);
+  gain.gain.linearRampToValueAtTime(vol,now+.06);
+  gain.gain.setValueAtTime(vol,now+dur*.6);
+  gain.gain.exponentialRampToValueAtTime(.001,now+dur);
+  // Reverb + mezcla dry/wet
+  const rev=makeReverb(actx),revG=actx.createGain(),dryG=actx.createGain();
+  revG.gain.value=.4;dryG.gain.value=.7;
+  // Conexiones
+  o1.connect(f1);o2.connect(f1);o1.connect(f2);o2.connect(f2);
+  f1.connect(fmix);f2.connect(fmix);
+  fmix.connect(dist);dist.connect(gain);
+  gain.connect(dryG);gain.connect(rev);
+  dryG.connect(actx.destination);rev.connect(revG);revG.connect(actx.destination);
+  const end=now+dur+.15;
+  vib.start(now);o1.start(now);o2.start(now);
+  vib.stop(end);o1.stop(end);o2.stop(end);
+}
+
+/* Beat rave 240bpm que arranca 3.8s después de los gritos */
+function startRaveBeat(){
+  if(!actx)return;
   function kick(){
-    const g=actx.createGain();g.gain.setValueAtTime(1.2,actx.currentTime);
-    g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.4);
+    const g=actx.createGain();
+    g.gain.setValueAtTime(1.1,actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.38);
     const o=actx.createOscillator();o.type='sine';
-    o.frequency.setValueAtTime(180,actx.currentTime);
-    o.frequency.exponentialRampToValueAtTime(30,actx.currentTime+.35);
+    o.frequency.setValueAtTime(170,actx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(28,actx.currentTime+.34);
     o.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+.4);
   }
-  // Hi-hat
   function hat(){
-    const buf=actx.createBuffer(1,actx.sampleRate*.08,actx.sampleRate);
-    const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*.4;
+    const buf=actx.createBuffer(1,actx.sampleRate*.07,actx.sampleRate);
+    const d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*.35;
     const s=actx.createBufferSource();s.buffer=buf;
-    const f=actx.createBiquadFilter();f.type='highpass';f.frequency.value=8000;
-    const g=actx.createGain();g.gain.setValueAtTime(.4,actx.currentTime);
-    g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.08);
+    const f=actx.createBiquadFilter();f.type='highpass';f.frequency.value=9000;
+    const g=actx.createGain();
+    g.gain.setValueAtTime(.35,actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.07);
     s.connect(f);f.connect(g);g.connect(actx.destination);s.start();
   }
-  // Rave synth arp
-  const notes=[220,277,330,415,440,554,660];
-  let ni=0;
-  function synth(){
+  const notes=[220,277,330,415,440,370,330,220];let ni=0;
+  function arp(){
     const o=actx.createOscillator();o.type='sawtooth';
-    const g=actx.createGain();g.gain.setValueAtTime(.12,actx.currentTime);
-    g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.18);
-    const f=actx.createBiquadFilter();f.type='lowpass';f.frequency.value=900;f.Q.value=8;
+    const f=actx.createBiquadFilter();f.type='lowpass';f.frequency.value=950;f.Q.value=10;
+    const g=actx.createGain();
+    g.gain.setValueAtTime(.1,actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.2);
     o.frequency.value=notes[ni%notes.length]*2;ni++;
-    o.connect(f);f.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+.18);
+    o.connect(f);f.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+.2);
   }
-  // Pattern: kick on 1 & 3, hat on every beat, synth offbeats
   let beat=0;
   setInterval(()=>{
     if(beat%4===0||beat%4===2)kick();
     hat();
-    if(beat%2===1)synth();
+    if(beat%2===1)arp();
     beat++;
-  },250); // 240bpm rave
+  },250);
+}
+
+/* Inicializa audio: primero los 3 gritos "aaah aaah", luego el beat */
+function initAudio(){
+  if(actx)return;
+  actx=new(window.AudioContext||window.webkitAudioContext)();
+  const now=actx.currentTime;
+  synthScream(now+.1,  310,.48,1.1);   // "aaah" — primero
+  synthScream(now+1.5, 290,.44,1.2);   // "aaah" — respuesta, más grave
+  synthScream(now+2.8, 330,.28, .9);   // eco lejano
+  setTimeout(startRaveBeat,3900);      // beat entra cuando terminan los gritos
+}
+
+/* ─── FAN NUMBER ─── */
+function getFanNum(){
+  let n=localStorage.getItem('sixsex_ultra_fan');
+  if(n)return parseInt(n);
+  const launch=new Date('2026-05-22');
+  const days=Math.max(0,Math.floor((Date.now()-launch)/864e5));
+  n=847+Math.floor(days*18+Math.random()*45)+Math.floor(Math.random()*20);
+  localStorage.setItem('sixsex_ultra_fan',n);
+  return n;
 }
 
 /* ─── ENTRY GATE ─── */
 const aud=document.getElementById('aud');
 function enter(){
-  document.getElementById('gate').classList.add('out');
-  aud.volume=.38;
-  const p=aud.play();
-  if(p&&p.catch)p.catch(()=>{});
-  // If audio element has no src, fallback to Web Audio
+  const btn=document.getElementById('gatebtn');
+  const fanDiv=document.getElementById('gate-fan');
+  const fanNumEl=document.getElementById('gate-fan-num');
+  // Oculta botón
+  btn.style.opacity='0';btn.style.pointerEvents='none';
+  // Calcula número de fan
+  const targetNum=getFanNum();
+  // Muestra reveal con animación contadora
   setTimeout(()=>{
-    if(aud.paused||aud.src===''||aud.src===window.location.href){
-      startWebAudio();
-    }
-  },800);
+    fanDiv.style.display='flex';
+    let current=Math.max(1,targetNum-Math.floor(Math.random()*60+25));
+    const iv=setInterval(()=>{
+      current+=Math.ceil((targetNum-current)/7)+1;
+      if(current>=targetNum){current=targetNum;clearInterval(iv)}
+      fanNumEl.textContent=String(current).padStart(4,'0');
+    },55);
+    // Tras 2.2s: cierra gate, arranca audio
+    setTimeout(()=>{
+      document.getElementById('gate').classList.add('out');
+      aud.volume=.36;
+      const p=aud.play();if(p&&p.catch)p.catch(()=>{});
+      // Si no hay src externo, arranca el audio sintético
+      setTimeout(()=>{
+        if(aud.paused||!aud.src||aud.src===location.href)initAudio();
+      },600);
+    },2200);
+  },550);
 }
 
 /* ─── AUDIO WIDGET ─── */
 let audOn=false;
-const abars=document.getElementById('abars');
-const audlbl=document.getElementById('audlbl');
+const abars=document.getElementById('abars'),audlbl=document.getElementById('audlbl');
 function toggleAud(){
   if(audOn){
     aud.pause();if(actx)actx.suspend();
     abars.classList.add('off');audlbl.textContent='AUDIO OFF';audOn=false;
   }else{
     const p=aud.play();if(p&&p.catch)p.catch(()=>{});
-    if(actx)actx.resume();
+    if(actx)actx.resume();else initAudio();
     abars.classList.remove('off');audlbl.textContent='SIX SEX RADIO';audOn=true;
   }
 }
@@ -1187,7 +1355,7 @@ aud.addEventListener('pause',()=>{audOn=false;abars.classList.add('off');audlbl.
 /* ─── COUNTDOWN (álbum ULTRA, 15 junio 2026) ─── */
 const TARGET=new Date('2026-06-15T00:00:00');
 function tick(){
-  const now=new Date(),d=TARGET-now;
+  const d=TARGET-new Date();
   if(d<=0){['cdd','cdh','cdm','cds'].forEach(id=>document.getElementById(id).textContent='00');return}
   document.getElementById('cdd').textContent=String(Math.floor(d/864e5)).padStart(2,'0');
   document.getElementById('cdh').textContent=String(Math.floor(d%864e5/36e5)).padStart(2,'0');
@@ -1226,13 +1394,38 @@ setInterval(()=>{
   setTimeout(()=>g.style.transform='',90);
 },1400);
 
-// Body RGB shift flicker
 setInterval(()=>{
   if(Math.random()>.68){
     document.body.style.filter=`hue-rotate(${Math.random()*8}deg) brightness(${1+Math.random()*.08})`;
     setTimeout(()=>document.body.style.filter='',55);
   }
 },4500);
+
+/* ═══════════════════════════════════════
+   KONAMI CODE — ↑ ↑ ↓ ↓ ← → ← → B A
+   Desbloquea el Manifiesto Ultra secreto
+═══════════════════════════════════════ */
+const KONAMI=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','KeyB','KeyA'];
+let kIdx=0;
+document.addEventListener('keydown',e=>{
+  if(e.code===KONAMI[kIdx]){
+    kIdx++;
+    if(kIdx===KONAMI.length){
+      kIdx=0;
+      document.getElementById('konami').classList.add('on');
+      // Scream de celebración
+      if(actx)synthScream(actx.currentTime+.05,350,.65,1.4);
+      else{initAudio();setTimeout(()=>synthScream(actx.currentTime+.1,350,.6,1.4),200)}
+      // Explosión de partículas desde el centro
+      for(let i=0;i<250;i++){
+        const p=new P();p.x=W/2;p.y=H/2;
+        p.vx=(Math.random()-.5)*22;p.vy=(Math.random()-.5)*22;
+        p.r=Math.random()*5+2;p.a=1;pts.push(p);
+      }
+      if(pts.length>600)pts.splice(0,200);
+    }
+  }else kIdx=0;
+});
 </script>
 </body>
 </html>
