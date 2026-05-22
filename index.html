@@ -729,6 +729,12 @@ footer::before{
   </div>
 </div>
 
+<!-- PHRASE BANNER (voz Six Sex, fijo en pantalla) -->
+<div id="phrase-banner">
+  <span id="phrase-text">NI TU ACTUAL NI TU EX</span>
+  <span id="phrase-credit">— SIX SEX</span>
+</div>
+
 <!-- ══════════ MODO ULTRA (Konami code secret) ══════════ -->
 <div id="konami">
   <div class="konami-title">MODO<br>ULTRA<br>ACTIVADO</div>
@@ -786,6 +792,7 @@ footer::before{
     <a href="#spotify">SPOTIFY</a>
     <a href="#community">COMUNIDAD</a>
     <a href="#proposals">PROPUESTAS</a>
+    <a href="#fancard">CARNÉ</a>
     <a href="#newsletter">LISTA</a>
   </div>
 </nav>
@@ -812,6 +819,93 @@ footer::before{
   94%{clip-path:polygon(0 82%,100% 82%,100% 93%,0 93%);transform:translateX(5px)}
   96%{clip-path:none;transform:none}
 }
+
+/* ═══════════════════════════════════════
+   PHRASE BANNER (voz de Six Sex)
+═══════════════════════════════════════ */
+#phrase-banner{
+  position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(80px);
+  z-index:9500;pointer-events:none;
+  background:rgba(0,0,0,.92);border:2px solid var(--p);
+  padding:14px 32px;white-space:nowrap;
+  opacity:0;transition:opacity .3s,transform .3s;
+  box-shadow:var(--gp);
+}
+#phrase-banner.show{opacity:1;transform:translateX(-50%) translateY(0);animation:glitchTxt .6s infinite}
+#phrase-text{
+  font-family:var(--fp);font-size:clamp(.55rem,2vw,.85rem);
+  color:var(--p);text-shadow:var(--gp);letter-spacing:3px;text-transform:uppercase;
+}
+#phrase-credit{
+  font-family:var(--fm);font-size:.5rem;color:#ff00ff44;
+  letter-spacing:2px;display:block;margin-top:4px;text-align:center;
+}
+
+/* ═══════════════════════════════════════
+   FAN CARD GENERATOR
+═══════════════════════════════════════ */
+#fancard{background:#030008}
+.fc-inner{max-width:820px;margin:0 auto}
+.fc-desc{font-family:var(--fv);font-size:1.2rem;color:#aaa;margin-bottom:36px;line-height:1.7;max-width:650px}
+.fc-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+@media(max-width:680px){.fc-layout{grid-template-columns:1fr}}
+
+.fc-upload-zone{
+  border:3px dashed #ff00ff44;padding:40px 24px;text-align:center;
+  background:#0d0012;cursor:none;transition:all .3s;position:relative;
+  min-height:200px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:16px;
+}
+.fc-upload-zone:hover,.fc-upload-zone.drag{border-color:var(--p);background:#ff00ff08;box-shadow:var(--gp)}
+.fc-upload-icon{font-size:3rem;filter:drop-shadow(0 0 10px var(--p))}
+.fc-upload-txt{font-family:var(--fp);font-size:.6rem;color:var(--p);letter-spacing:2px;line-height:1.8;text-align:center}
+.fc-upload-sub{font-family:var(--fm);font-size:.58rem;color:#555;letter-spacing:1px}
+#fc-file{display:none}
+
+.fc-options{margin-top:20px;display:flex;flex-direction:column;gap:12px}
+.fc-opt-lbl{font-family:var(--fm);font-size:.6rem;color:var(--c);letter-spacing:2px;display:block;margin-bottom:4px}
+.fc-select{
+  width:100%;background:#050505;border:1px solid #ff00ff33;color:#fff;
+  padding:9px 12px;font-family:var(--fv);font-size:1.1rem;outline:none;
+  transition:border-color .3s;cursor:none;
+}
+.fc-select:focus{border-color:var(--p)}
+.fc-select option{background:#0d0012}
+
+.fc-generate-btn{
+  width:100%;font-family:var(--fp);font-size:.6rem;padding:16px;
+  background:linear-gradient(135deg,var(--p),#8800cc);color:#fff;
+  border:none;cursor:none;letter-spacing:3px;margin-top:16px;
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.fc-generate-btn:hover{box-shadow:var(--gp);transform:scale(1.02)}
+.fc-generate-btn:disabled{opacity:.4;pointer-events:none}
+
+.fc-preview{position:relative}
+#fc-canvas{
+  width:100%;max-width:500px;display:none;
+  border:3px solid var(--p);box-shadow:var(--gp);image-rendering:pixelated;
+}
+#fc-placeholder{
+  width:100%;aspect-ratio:1;background:#0a0010;
+  border:2px dashed #ff00ff22;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;
+}
+#fc-placeholder span:first-child{font-size:3rem;filter:drop-shadow(0 0 10px var(--p))}
+#fc-placeholder p{font-family:var(--fp);font-size:.5rem;color:#ff00ff33;text-align:center;line-height:1.8}
+
+#fc-status{
+  font-family:var(--fp);font-size:.62rem;color:var(--c);
+  text-shadow:var(--gc);margin-top:12px;display:none;
+  text-align:center;letter-spacing:2px;
+}
+.fc-download-btn{
+  display:none;width:100%;font-family:var(--fp);font-size:.62rem;
+  padding:14px;background:transparent;border:2px solid var(--c);
+  color:var(--c);cursor:none;letter-spacing:2px;margin-top:12px;
+  transition:all .3s;text-align:center;
+}
+.fc-download-btn:hover{background:var(--c);color:#000;box-shadow:var(--gc)}
 </style>
 
 <!-- marquee 1 -->
@@ -1215,6 +1309,72 @@ footer::before{
         ✦ TRANSMISIÓN RECIBIDA ✦<br><br>
         La cueva lo procesará.<br>Six Sex lo verá.
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FAN CARD GENERATOR ══════════ -->
+<section id="fancard">
+  <div class="inn fc-inner">
+    <h2 class="stitle glitch">09 / GENERADOR DE CARNÉ ULTRA 🖤</h2>
+    <p class="fc-desc">
+      Sube tu foto y la <strong style="color:var(--p)">IA de la Cueva</strong> te crea un carné de fan oficial
+      con el estilo de la web. Descárgalo y úsalo como foto de perfil en Instagram, WhatsApp o donde quieras.
+      Pásalo con orgullo — somos la primera cueva hispana de Six Sex.
+    </p>
+
+    <div class="fc-layout">
+
+      <!-- Columna izquierda: upload + opciones -->
+      <div>
+        <div class="fc-upload-zone" id="fc-zone" onclick="document.getElementById('fc-file').click()"
+             ondragover="fcDragOver(event)" ondragleave="fcDragLeave(event)" ondrop="fcDrop(event)">
+          <span class="fc-upload-icon">📸</span>
+          <div class="fc-upload-txt">SUBE TU FOTO AQUÍ<br>o arrastra la imagen</div>
+          <div class="fc-upload-sub">JPG / PNG · Cuadrada preferible</div>
+          <input type="file" id="fc-file" accept="image/*" onchange="fcFileSelected(event)"/>
+        </div>
+
+        <div class="fc-options">
+          <div>
+            <label class="fc-opt-lbl">ESTILO DE CARNÉ</label>
+            <select class="fc-select" id="fc-style">
+              <option value="ultra">ULTRA (Rosa neón + negro)</option>
+              <option value="cyan">CUEVA CIAN (Cyan + negro)</option>
+              <option value="blood">BLOOD RAVE (Rojo + negro)</option>
+              <option value="gold">GOLD FAN (Dorado + negro)</option>
+            </select>
+          </div>
+          <div>
+            <label class="fc-opt-lbl">MENSAJE EN EL CARNÉ</label>
+            <select class="fc-select" id="fc-msg">
+              <option value="cueva">CUEVA FAN · SPAIN 2026</option>
+              <option value="ultra">ULTRA FAN · SIX SEX</option>
+              <option value="pornstar">NI TU ACTUAL NI TU EX</option>
+              <option value="noquiero">YO NO SOY TU PORNSTAR</option>
+              <option value="custom">LA REINA DEL CAOS</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="fc-generate-btn" id="fc-gen-btn" onclick="generateCard()" disabled>
+          ⚡ GENERAR MI CARNÉ ULTRA ⚡
+        </button>
+      </div>
+
+      <!-- Columna derecha: preview + descarga -->
+      <div class="fc-preview">
+        <div id="fc-placeholder">
+          <span>🖤</span>
+          <p>TU CARNÉ ULTRA<br>APARECERÁ AQUÍ<br><br>Sube tu foto primero</p>
+        </div>
+        <canvas id="fc-canvas" width="600" height="600"></canvas>
+        <div id="fc-status">✦ CARNÉ ULTRA GENERADO ✦</div>
+        <button class="fc-download-btn" id="fc-dl-btn" onclick="downloadCard()">
+          ↓ DESCARGAR MI CARNÉ (PNG)
+        </button>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1678,6 +1838,280 @@ document.addEventListener('keydown',e=>{
     }
   }else kIdx=0;
 });
+
+/* ═══════════════════════════════════════
+   VOZ DE SIX SEX — speechSynthesis
+   Frases suyas que suenan de repente
+═══════════════════════════════════════ */
+const PHRASES=[
+  {t:'Ni tu actual ni tu ex',     src:'Six Sex'},
+  {t:'Yo no soy tu pornstar',     src:'Six Sex'},
+  {t:'Ultra',                      src:'Six Sex'},
+  {t:'O seis sex',                 src:'Six Sex'},
+  {t:'La cueva',                   src:'La Cueva Ultra'},
+  {t:'Ultra terrorific fantasy',   src:'Six Sex'},
+  {t:'No me quiero dormir',        src:'Six Sex'},
+  {t:'Cueva hispana',              src:'La Cueva Ultra'},
+];
+let synVoice=null,synReady=false;
+
+function loadVoice(){
+  const voices=speechSynthesis.getVoices();
+  // Prioridad: voz femenina en español (es-AR > es-ES > es)
+  synVoice=voices.find(v=>v.lang==='es-AR'&&v.name.toLowerCase().includes('female'))
+    ||voices.find(v=>v.lang.startsWith('es-AR'))
+    ||voices.find(v=>v.lang==='es-ES'&&v.name.toLowerCase().match(/female|mujer|lucia|carmen|monica/))
+    ||voices.find(v=>v.lang.startsWith('es'))
+    ||null;
+  synReady=true;
+}
+speechSynthesis.onvoiceschanged=loadVoice;
+loadVoice();
+
+function speakPhrase(phrase){
+  if(!synReady||!('speechSynthesis' in window))return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(phrase.t);
+  u.lang='es';
+  if(synVoice)u.voice=synVoice;
+  u.rate=0.78;    // un poco más lento, dramático
+  u.pitch=1.25;   // voz femenina más aguda
+  u.volume=0.75;
+  // Muestra el banner visual
+  const banner=document.getElementById('phrase-banner');
+  const txt=document.getElementById('phrase-text');
+  const cred=document.getElementById('phrase-credit');
+  txt.textContent=phrase.t.toUpperCase();
+  cred.textContent='— '+phrase.src.toUpperCase();
+  banner.classList.add('show');
+  u.onend=()=>{
+    setTimeout(()=>banner.classList.remove('show'),1200);
+  };
+  speechSynthesis.speak(u);
+}
+
+function fireRandomPhrase(){
+  if(document.getElementById('gate').classList.contains('out')){
+    speakPhrase(PHRASES[Math.floor(Math.random()*PHRASES.length)]);
+  }
+}
+
+// Arranca 18s después de entrar, luego cada 40-70s
+let phraseStarted=false;
+function startPhrases(){
+  if(phraseStarted)return;
+  phraseStarted=true;
+  setTimeout(()=>{
+    fireRandomPhrase();
+    setInterval(()=>{
+      if(Math.random()>.3)fireRandomPhrase();
+    },45000+Math.random()*25000);
+  },18000);
+}
+// Trigger cuando el usuario entra al site
+const _origEnter=window.enter;
+window.enter=function(){_origEnter&&_origEnter();setTimeout(startPhrases,100)};
+
+/* ═══════════════════════════════════════
+   FAN CARD GENERATOR — Canvas API
+═══════════════════════════════════════ */
+const CARD_COLORS={
+  ultra:{main:'#ff00ff',sec:'#00ffff',glow:'#ff00ff'},
+  cyan: {main:'#00ffff',sec:'#ff00ff',glow:'#00ffff'},
+  blood:{main:'#ff0044',sec:'#ff00ff',glow:'#ff0044'},
+  gold: {main:'#ffcc00',sec:'#ff00ff',glow:'#ffcc00'},
+};
+const CARD_MSGS={
+  cueva:'CUEVA FAN · SPAIN 2026',
+  ultra:'ULTRA FAN · SIX SEX',
+  pornstar:'NI TU ACTUAL NI TU EX',
+  noquiero:'YO NO SOY TU PORNSTAR',
+  custom:'LA REINA DEL CAOS',
+};
+
+let fcImgSrc=null;
+
+function fcFileSelected(e){
+  const file=e.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    fcImgSrc=ev.target.result;
+    document.getElementById('fc-gen-btn').disabled=false;
+    // Preview rápido en zona de upload
+    const zone=document.getElementById('fc-zone');
+    zone.style.backgroundImage=`url(${fcImgSrc})`;
+    zone.style.backgroundSize='cover';
+    zone.style.backgroundPosition='center';
+    zone.style.opacity='0.7';
+  };
+  reader.readAsDataURL(file);
+}
+function fcDragOver(e){e.preventDefault();document.getElementById('fc-zone').classList.add('drag')}
+function fcDragLeave(){document.getElementById('fc-zone').classList.remove('drag')}
+function fcDrop(e){
+  e.preventDefault();
+  fcDragLeave();
+  const file=e.dataTransfer.files[0];
+  if(!file||!file.type.startsWith('image/'))return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    fcImgSrc=ev.target.result;
+    document.getElementById('fc-gen-btn').disabled=false;
+    const zone=document.getElementById('fc-zone');
+    zone.style.backgroundImage=`url(${fcImgSrc})`;
+    zone.style.backgroundSize='cover';
+    zone.style.backgroundPosition='center';
+    zone.style.opacity='0.7';
+  };
+  reader.readAsDataURL(file);
+}
+
+function generateCard(){
+  if(!fcImgSrc)return;
+  const style=document.getElementById('fc-style').value;
+  const msg=CARD_MSGS[document.getElementById('fc-msg').value];
+  const col=CARD_COLORS[style]||CARD_COLORS.ultra;
+  const fanNum=getFanNum();
+
+  const canvas=document.getElementById('fc-canvas');
+  const ctx=canvas.getContext('2d');
+  const W=600,H=600;
+  canvas.width=W;canvas.height=H;
+
+  const img=new Image();
+  img.onload=()=>{
+    // — FONDO NEGRO —
+    ctx.fillStyle='#050505';
+    ctx.fillRect(0,0,W,H);
+
+    // — GRADIENTE RADIAL —
+    const grad=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.6);
+    grad.addColorStop(0,col.main+'18');
+    grad.addColorStop(1,'transparent');
+    ctx.fillStyle=grad;
+    ctx.fillRect(0,0,W,H);
+
+    // — GRID LINES —
+    ctx.strokeStyle=col.main+'0d';
+    ctx.lineWidth=1;
+    for(let x=0;x<W;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    for(let y=0;y<H;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+
+    // — FOTO USUARIO (cuadrado centrado, 320x320) —
+    const PH=310,PY=105,PX=(W-PH)/2;
+    ctx.save();
+    ctx.beginPath();ctx.rect(PX,PY,PH,PH);ctx.clip();
+    // Crop cuadrado manteniendo ratio
+    const r=Math.max(PH/img.width,PH/img.height);
+    const iW=img.width*r,iH=img.height*r;
+    ctx.drawImage(img,PX+(PH-iW)/2,PY+(PH-iH)/2,iW,iH);
+    // Tinte de color sobre la foto
+    ctx.fillStyle=col.main+'22';
+    ctx.fillRect(PX,PY,PH,PH);
+    ctx.restore();
+
+    // — SCANLINES sobre foto —
+    for(let y=PY;y<PY+PH;y+=4){
+      ctx.fillStyle='rgba(0,0,0,.14)';ctx.fillRect(PX,y,PH,2);
+    }
+
+    // — BORDE FOTO —
+    ctx.strokeStyle=col.main;ctx.lineWidth=3;
+    ctx.shadowBlur=18;ctx.shadowColor=col.glow;
+    ctx.strokeRect(PX,PY,PH,PH);ctx.shadowBlur=0;
+
+    // — ABERRACIÓN CROMÁTICA en esquinas de foto —
+    ctx.save();
+    ctx.globalAlpha=.4;
+    ctx.fillStyle='#ff000033';ctx.fillRect(PX,PY,4,PH);
+    ctx.fillStyle='#0000ff33';ctx.fillRect(PX+PH-4,PY,4,PH);
+    ctx.restore();
+
+    // — TEXTO SUPERIOR "SIX SEX / ULTRA" —
+    ctx.textAlign='center';
+    ctx.shadowBlur=20;ctx.shadowColor=col.glow;
+    ctx.fillStyle=col.main;
+    ctx.font='bold 20px "Press Start 2P", monospace';
+    ctx.fillText('SIX SEX',W/2,58);
+    ctx.font='bold 28px "Press Start 2P", monospace';
+    ctx.fillText('ULTRA',W/2,93);
+    ctx.shadowBlur=0;
+
+    // — LÍNEA SEPARADORA TOP —
+    const lg=ctx.createLinearGradient(40,0,W-40,0);
+    lg.addColorStop(0,'transparent');lg.addColorStop(.5,col.main);lg.addColorStop(1,'transparent');
+    ctx.strokeStyle=lg;ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(40,102);ctx.lineTo(W-40,102);ctx.stroke();
+
+    // — GLITCH BANDS aleatorias —
+    for(let i=0;i<4;i++){
+      const gy=PY+Math.floor(Math.random()*PH);
+      try{
+        const strip=ctx.getImageData(PX,gy,PH,2);
+        ctx.putImageData(strip,PX+(Math.random()>.5?6:-6),gy);
+      }catch(e){}
+    }
+
+    // — TEXTO INFERIOR —
+    ctx.shadowBlur=10;ctx.shadowColor=col.sec;
+    ctx.fillStyle=col.sec;
+    ctx.font='10px "Share Tech Mono", monospace';
+    ctx.fillText(msg,W/2,442);
+    ctx.shadowBlur=0;
+
+    ctx.fillStyle=col.main;
+    ctx.font='bold 13px "Share Tech Mono", monospace';
+    ctx.fillText(`CUEVA HISPANA · FAN Nº ${String(fanNum).padStart(4,'0')}`,W/2,462);
+
+    ctx.fillStyle=col.main+'66';
+    ctx.font='9px "Share Tech Mono", monospace';
+    ctx.fillText('PRIMERA WEB HISPANA DE FANS · 2026',W/2,480);
+    ctx.fillText('pakeviniste.github.io/Snow-Pammy',W/2,494);
+
+    // — BORDE EXTERNO NEÓN —
+    ctx.strokeStyle=col.main;ctx.lineWidth=4;
+    ctx.shadowBlur=25;ctx.shadowColor=col.glow;
+    ctx.strokeRect(8,8,W-16,H-16);
+    ctx.shadowBlur=0;
+    ctx.strokeStyle=col.sec+'44';ctx.lineWidth=1;
+    ctx.strokeRect(14,14,W-28,H-28);
+
+    // — MARCAS DE ESQUINA —
+    const M=22;ctx.strokeStyle=col.main;ctx.lineWidth=3;
+    ctx.shadowBlur=8;ctx.shadowColor=col.glow;
+    [[8,8],[W-8,8],[8,H-8],[W-8,H-8]].forEach(([cx2,cy2])=>{
+      const sx=cx2===8?1:-1,sy=cy2===8?1:-1;
+      ctx.beginPath();
+      ctx.moveTo(cx2+sx*M,cy2);ctx.lineTo(cx2,cy2);ctx.lineTo(cx2,cy2+sy*M);
+      ctx.stroke();
+    });
+    ctx.shadowBlur=0;
+
+    // — LOGO SIX SEX ESQUINA —
+    ctx.fillStyle=col.main+'88';
+    ctx.font='8px "Share Tech Mono", monospace';
+    ctx.textAlign='left';ctx.fillText('🖤 SIX SEX ULTRA',20,H-20);
+    ctx.textAlign='right';ctx.fillText('LA CUEVA HISPANA 🖤',W-20,H-20);
+
+    // — MOSTRAR CANVAS Y BOTÓN —
+    document.getElementById('fc-placeholder').style.display='none';
+    canvas.style.display='block';
+    document.getElementById('fc-status').style.display='block';
+    document.getElementById('fc-dl-btn').style.display='block';
+  };
+  img.crossOrigin='anonymous';
+  img.src=fcImgSrc;
+}
+
+function downloadCard(){
+  const canvas=document.getElementById('fc-canvas');
+  if(!canvas)return;
+  const a=document.createElement('a');
+  a.download=`sixsex-ultra-fan-${getFanNum()}.png`;
+  a.href=canvas.toDataURL('image/png');
+  a.click();
+}
 </script>
 </body>
 </html>
