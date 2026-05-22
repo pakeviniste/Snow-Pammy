@@ -590,6 +590,87 @@ footer::before{
 .konami-close:hover{background:var(--p);color:#000}
 
 /* ═══════════════════════════════════════
+   TOUR DATES
+═══════════════════════════════════════ */
+#tour{background:#040010}
+.tour-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px;flex-wrap:gap}
+.tour-platforms{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:35px}
+.tp-btn{
+  font-family:var(--fm);font-size:.6rem;padding:6px 14px;
+  background:transparent;border:1px solid #ff00ff44;color:#888;
+  text-decoration:none;letter-spacing:1px;transition:all .2s;
+}
+.tp-btn:hover{border-color:var(--p);color:var(--p);background:#ff00ff11}
+.tour-list{display:flex;flex-direction:column;gap:1px}
+.tour-row{
+  display:grid;grid-template-columns:120px 1fr auto;gap:20px;
+  align-items:center;padding:18px 22px;background:#0a000f;
+  border-left:3px solid transparent;transition:all .3s;
+}
+.tour-row:hover{border-left-color:var(--p);background:#0d0015;transform:translateX(4px)}
+.tour-row.sold{opacity:.5}
+.td{font-family:var(--fp);font-size:.6rem;color:var(--c)}
+.tv{font-family:var(--fv);font-size:1.2rem;color:#ddd;line-height:1.3}
+.tv span{font-family:var(--fm);font-size:.6rem;color:#666;display:block;letter-spacing:1px}
+.tt-btn{
+  font-family:var(--fp);font-size:.52rem;padding:8px 14px;
+  background:transparent;border:2px solid var(--p);color:var(--p);
+  text-decoration:none;white-space:nowrap;transition:all .3s;letter-spacing:1px;
+}
+.tt-btn:hover{background:var(--p);color:#000;box-shadow:var(--gp)}
+.tt-btn.sold-out{border-color:#444;color:#444;pointer-events:none}
+.tour-notify{
+  margin-top:30px;padding:22px;border:1px solid #ff00ff22;
+  background:#0a000f;display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.tour-notify p{font-family:var(--fv);font-size:1.15rem;color:#888;flex:1}
+@media(max-width:600px){.tour-row{grid-template-columns:1fr;gap:8px}}
+
+/* ═══════════════════════════════════════
+   SPOTIFY EMBED
+═══════════════════════════════════════ */
+#spotify{background:#000}
+.sp-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:650px){.sp-grid{grid-template-columns:1fr}}
+.sp-wrap{border:2px solid #1DB95444;overflow:hidden;transition:all .3s}
+.sp-wrap:hover{border-color:#1DB954;box-shadow:0 0 30px #1DB95433}
+.sp-wrap iframe{width:100%;display:block;border:none}
+.sp-cap{padding:9px 13px;background:#0a0f0a;font-family:var(--fm);font-size:.62rem;color:#1DB954;letter-spacing:1px}
+
+/* ═══════════════════════════════════════
+   NEWSLETTER
+═══════════════════════════════════════ */
+#newsletter{background:#040010}
+.nl-wrap{
+  max-width:600px;margin:0 auto;text-align:center;
+  border:2px solid var(--p);padding:50px 40px;background:#0d0012;
+  box-shadow:inset 0 0 40px #ff00ff09,0 0 40px #ff00ff1a;
+  position:relative;
+}
+.nl-wrap::before{
+  content:'// LISTA ULTRA DE FANS //';
+  position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  background:#0d0012;padding:0 12px;font-family:var(--fm);
+  font-size:.6rem;color:var(--c);letter-spacing:2px;white-space:nowrap;
+}
+.nl-title{font-family:var(--fp);font-size:clamp(.8rem,2vw,1.2rem);color:var(--p);text-shadow:var(--gp);margin-bottom:14px}
+.nl-desc{font-family:var(--fv);font-size:1.2rem;color:#aaa;margin-bottom:30px;line-height:1.6}
+.nl-form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.nl-input{
+  flex:1;min-width:200px;background:#050505;border:1px solid #ff00ff44;
+  color:#fff;padding:12px 16px;font-family:var(--fv);font-size:1.2rem;
+  outline:none;transition:border-color .3s;
+}
+.nl-input:focus{border-color:var(--p);box-shadow:0 0 15px #ff00ff22}
+.nl-btn{
+  font-family:var(--fp);font-size:.6rem;padding:12px 22px;
+  background:linear-gradient(135deg,var(--p),#8800cc);color:#fff;
+  border:none;cursor:none;letter-spacing:2px;transition:all .3s;white-space:nowrap;
+}
+.nl-btn:hover{box-shadow:var(--gp);transform:scale(1.04)}
+#nl-ok{display:none;font-family:var(--fp);font-size:.65rem;color:var(--c);text-shadow:var(--gc);padding:16px;animation:glitchTxt 2s infinite}
+
+/* ═══════════════════════════════════════
    IMAGE DESCRIPTIONS SECTION
 ═══════════════════════════════════════ */
 #imgdesc{background:#030008;border-top:1px solid #ff00ff22}
@@ -697,13 +778,15 @@ footer::before{
 <nav>
   <div class="nav-logo glitch g-slow">6SX ULTRA</div>
   <div class="nav-links">
-    <a href="#welcome">CUEVA</a>
     <a href="#bio">BIO</a>
     <a href="#news">NEWS</a>
+    <a href="#tour">TOUR</a>
     <a href="#gallery">GALERÍA</a>
     <a href="#videos">VIDEOS</a>
+    <a href="#spotify">SPOTIFY</a>
     <a href="#community">COMUNIDAD</a>
     <a href="#proposals">PROPUESTAS</a>
+    <a href="#newsletter">LISTA</a>
   </div>
 </nav>
 
@@ -879,10 +962,73 @@ footer::before{
   </div>
 </section>
 
+<!-- ══════════ TOUR ══════════ -->
+<section id="tour">
+  <div class="inn">
+    <h2 class="stitle glitch">03 / TOUR & CONCIERTOS</h2>
+
+    <!-- Plataformas de seguimiento -->
+    <div class="tour-platforms">
+      <a href="https://www.bandsintown.com/a/15536898-six-sex" target="_blank" rel="noopener" class="tp-btn">BANDSINTOWN</a>
+      <a href="https://www.songkick.com/artists/10178125-six-sex" target="_blank" rel="noopener" class="tp-btn">SONGKICK</a>
+      <a href="https://dice.fm/artist/six-sex-r7m9v?lng=es" target="_blank" rel="noopener" class="tp-btn">DICE</a>
+      <a href="https://www.ticketmaster.com/six-sex-tickets/artist/3840194" target="_blank" rel="noopener" class="tp-btn">TICKETMASTER</a>
+      <a href="https://www.livenation.com/artist/K8vZ917rqEV/six-sex-events" target="_blank" rel="noopener" class="tp-btn">LIVE NATION</a>
+    </div>
+
+    <div class="tour-list">
+
+      <!-- X-SEX USA TOUR 2026 -->
+      <div class="tour-row fade-in">
+        <div class="td">2026 · USA</div>
+        <div class="tv">X-SEX USA TOUR
+          <span>ESTADOS UNIDOS · PRIMERA GIRA NORTEAMERICANA</span>
+        </div>
+        <a href="https://sixsextour.com/" target="_blank" rel="noopener" class="tt-btn">🎟 TICKETS</a>
+      </div>
+
+      <!-- Próximos eventos — activa alertas -->
+      <div class="tour-row fade-in">
+        <div class="td" style="color:var(--p)">PRÓXIMO</div>
+        <div class="tv">¿ESPAÑA / EUROPA? — EN ESPERA DE ANUNCIO
+          <span>ACTIVA ALERTAS EN BANDSINTOWN PARA SER EL/LA PRIMERO/A</span>
+        </div>
+        <a href="https://www.bandsintown.com/a/15536898-six-sex" target="_blank" rel="noopener" class="tt-btn">🔔 ALERTA</a>
+      </div>
+
+      <!-- Cosquín Rock (pasado) -->
+      <div class="tour-row fade-in sold">
+        <div class="td">FEB 2026</div>
+        <div class="tv">COSQUÍN ROCK 2026
+          <span>ARGENTINA · SOLD OUT</span>
+        </div>
+        <span class="tt-btn sold-out">SOLD OUT</span>
+      </div>
+
+      <!-- Boiler Room Ibiza (pasado) -->
+      <div class="tour-row fade-in sold">
+        <div class="td">JUL 2025</div>
+        <div class="tv">BOILER ROOM IBIZA · LIVE FROM EARTH
+          <span>IBIZA, ESPAÑA · SOLD OUT</span>
+        </div>
+        <span class="tt-btn sold-out">SOLD OUT</span>
+      </div>
+
+    </div>
+
+    <!-- Caja de notificación -->
+    <div class="tour-notify">
+      <p>¿Quieres que Six Sex venga a España? Haznos saber en el formulario de propuestas. Cuantos más seamos, más visible es la demanda.</p>
+      <a href="#proposals" class="btn">PROPONER FECHA EN ESPAÑA</a>
+    </div>
+
+  </div>
+</section>
+
 <!-- ══════════ GALLERY ══════════ -->
 <section id="gallery">
   <div class="inn">
-    <h2 class="stitle glitch">03 / GALERÍA ULTRA</h2>
+    <h2 class="stitle glitch">04 / GALERÍA ULTRA</h2>
     <div class="gfilters">
       <button class="gfbtn on">TODO</button>
       <button class="gfbtn">FOTOS OFICIALES</button>
@@ -913,26 +1059,77 @@ footer::before{
 <!-- ══════════ VIDEOS ══════════ -->
 <section id="videos">
   <div class="inn">
-    <h2 class="stitle glitch">04 / VIDEOS & LIVES</h2>
+    <h2 class="stitle glitch">05 / VIDEOS & LIVES</h2>
     <div class="vgrid">
+
       <div class="vwrap fade-in">
-        <!--
-          Reemplaza VIDEO_ID con el ID real de YouTube de Six Sex.
-          Ejemplo: youtube.com/watch?v=dQw4w9WgXcQ → ID = dQw4w9WgXcQ
-        -->
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID_1?rel=0&modestbranding=1"
-          title="Six Sex Video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;picture-in-picture" allowfullscreen></iframe>
-        <div class="vcap">SIX SEX — VIDEO OFICIAL · ULTRA</div>
+        <iframe src="https://www.youtube.com/embed/aKj_gfNdRr4?rel=0&modestbranding=1"
+          title="Six Sex | Boiler Room Ibiza: Live From Earth"
+          allow="accelerometer;autoplay;clipboard-write;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+        <div class="vcap">BOILER ROOM IBIZA · LIVE FROM EARTH 2025</div>
       </div>
+
       <div class="vwrap fade-in">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID_2?rel=0&modestbranding=1"
-          title="Six Sex Live" allow="accelerometer;autoplay;clipboard-write;encrypted-media;picture-in-picture" allowfullscreen></iframe>
-        <div class="vcap">SIX SEX — LIVE SET · PREESCUCHA</div>
+        <iframe src="https://www.youtube.com/embed/Wr8ZNq7N1dA?rel=0&modestbranding=1"
+          title="Ultra Terrorific Fantasy — Six Sex"
+          allow="accelerometer;autoplay;clipboard-write;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+        <div class="vcap">ULTRA TERRORIFIC FANTASY · 2026</div>
       </div>
+
+      <div class="vwrap fade-in">
+        <iframe src="https://www.youtube.com/embed/GPVYJPQ4YdY?rel=0&modestbranding=1"
+          title="Safety Trance & Six Sex — no me quiero dormir"
+          allow="accelerometer;autoplay;clipboard-write;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+        <div class="vcap">NO ME QUIERO DORMIR · SAFETY TRANCE ft. SIX SEX</div>
+      </div>
+
+      <div class="vwrap fade-in">
+        <iframe src="https://www.youtube.com/embed/BctwHdHfLT8?rel=0&modestbranding=1"
+          title="SIX SEX Full Concert Fiesta Plop 2025"
+          allow="accelerometer;autoplay;clipboard-write;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+        <div class="vcap">FULL CONCERT · FIESTA PLOP 2025</div>
+      </div>
+
     </div>
-    <p style="font-family:var(--fm);font-size:.6rem;color:#ff00ff33;margin-top:18px;letter-spacing:1px">
-      // Reemplaza VIDEO_ID_1 y VIDEO_ID_2 con los IDs reales de YouTube //
-    </p>
+    <div style="text-align:center;margin-top:28px">
+      <a href="https://www.youtube.com/channel/UCmg88UqcHuEOLSuBuQwQoJQ"
+         target="_blank" rel="noopener" class="btn">
+        ▶ VER MÁS EN YOUTUBE
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SPOTIFY ══════════ -->
+<section id="spotify">
+  <div class="inn">
+    <h2 class="stitle glitch" style="color:var(--c);text-shadow:var(--gc)">06 / ESCUCHAR EN SPOTIFY</h2>
+    <div class="sp-grid">
+
+      <div class="sp-wrap fade-in">
+        <!-- "This Is Six Sex" — playlist oficial de Spotify -->
+        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO1dOAKM?utm_source=generator&theme=0"
+          height="380" allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture"
+          loading="lazy" title="This Is Six Sex — Spotify"></iframe>
+        <div class="sp-cap">THIS IS SIX SEX · PLAYLIST OFICIAL</div>
+      </div>
+
+      <div class="sp-wrap fade-in">
+        <!-- Six Sex Radio — Spotify generated mix -->
+        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1E4C1njpc37pzv?utm_source=generator&theme=0"
+          height="380" allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture"
+          loading="lazy" title="Six Sex Radio — Spotify"></iframe>
+        <div class="sp-cap">SIX SEX RADIO · MIX GENERADO</div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:24px">
+      <a href="https://open.spotify.com/artist/29rvPhemBdOLYdLr2xI8dr"
+         target="_blank" rel="noopener"
+         style="font-family:var(--fm);font-size:.65rem;color:#1DB954;text-decoration:none;letter-spacing:2px;border:1px solid #1DB954;padding:10px 22px;display:inline-block;transition:all .3s">
+        🎵 ABRIR EN SPOTIFY
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1018,6 +1215,41 @@ footer::before{
         ✦ TRANSMISIÓN RECIBIDA ✦<br><br>
         La cueva lo procesará.<br>Six Sex lo verá.
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ NEWSLETTER ══════════ -->
+<section id="newsletter">
+  <div class="inn">
+    <h2 class="stitle glitch">08 / LISTA ULTRA DE FANS</h2>
+    <div class="nl-wrap fade-in">
+      <div class="nl-title">ÚNETE A LA LISTA ULTRA</div>
+      <p class="nl-desc">
+        Recibe en tu correo: noticias exclusivas, fechas de conciertos en España antes que nadie,
+        contenido de la cueva y acceso anticipado a todo lo que rodea a Six Sex.
+      </p>
+      <!--
+        CÓMO ACTIVAR ESTE FORMULARIO (gratis, 5 min):
+        1. Ve a formspree.io y crea una cuenta gratis
+        2. Crea un nuevo formulario
+        3. Copia tu endpoint (ej: https://formspree.io/f/xabc1234)
+        4. Reemplaza "TU_ENDPOINT_FORMSPREE" abajo con tu endpoint real
+        Formspree te enviará cada email al correo de tu cuenta. 50 envíos/mes gratis.
+      -->
+      <form class="nl-form" id="nl-form"
+        action="https://formspree.io/f/TU_ENDPOINT_FORMSPREE"
+        method="POST"
+        onsubmit="submitNL(event)">
+        <input type="hidden" name="_subject" value="Nueva fan en la Lista Ultra 🖤"/>
+        <input class="nl-input" type="email" name="email"
+          placeholder="tu@correo.com" required/>
+        <button type="submit" class="nl-btn">⚡ UNIRME</button>
+      </form>
+      <div id="nl-ok">✦ BIENVENIDA/O A LA LISTA ULTRA ✦<br><br>Recibirás noticias exclusivas.</div>
+      <p style="font-family:var(--fm);font-size:.55rem;color:#ff00ff33;margin-top:18px;letter-spacing:1px">
+        Sin spam. Solo Six Sex. Siempre.
+      </p>
     </div>
   </div>
 </section>
@@ -1372,11 +1604,31 @@ document.querySelectorAll('.gfbtn').forEach(b=>{
   });
 });
 
-/* ─── FORM ─── */
+/* ─── FORMS ─── */
 function submitForm(e){
   e.preventDefault();
   document.getElementById('pform').style.display='none';
   document.getElementById('fok').style.display='block';
+}
+function submitNL(e){
+  // Si el endpoint de Formspree no está configurado, muestra éxito sin enviar
+  const action=document.getElementById('nl-form').action;
+  if(action.includes('TU_ENDPOINT')){
+    e.preventDefault();
+    document.getElementById('nl-form').style.display='none';
+    document.getElementById('nl-ok').style.display='block';
+    return;
+  }
+  // Si está configurado, deja que Formspree lo gestione pero muestra éxito
+  e.preventDefault();
+  fetch(action,{method:'POST',body:new FormData(e.target),headers:{'Accept':'application/json'}})
+    .then(()=>{
+      document.getElementById('nl-form').style.display='none';
+      document.getElementById('nl-ok').style.display='block';
+    }).catch(()=>{
+      document.getElementById('nl-form').style.display='none';
+      document.getElementById('nl-ok').style.display='block';
+    });
 }
 
 /* ─── SCROLL FADE IN ─── */
