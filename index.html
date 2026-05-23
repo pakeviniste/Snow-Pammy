@@ -6,6 +6,7 @@
 <title>SIX SEX ULTRA ✦ La Cueva Pionera</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
 
 <style>
 /* ═══════════════════════════════════════
@@ -557,6 +558,75 @@ footer::before{
 .desc-card h3{font-family:var(--fp);font-size:.65rem;color:var(--p);margin-bottom:12px;line-height:1.6}
 .desc-card p{font-family:var(--fv);font-size:1.1rem;color:#999;line-height:1.6}
 .desc-tag{font-family:var(--fm);font-size:.58rem;color:var(--c);margin-top:10px;display:block}
+
+/* ═══════════════════════════════════════
+   PEGATINAS & HITOS
+═══════════════════════════════════════ */
+#stickers{background:#060010}
+.sk-toggle-wrap{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap}
+.sk-toggle{
+  font-family:var(--fp);font-size:.56rem;padding:10px 20px;
+  background:transparent;border:2px solid #ff00ff33;color:#555;
+  cursor:none;letter-spacing:2px;transition:all .25s;
+}
+.sk-toggle.on,.sk-toggle:hover{border-color:var(--p);color:var(--p);background:#ff00ff0f;text-shadow:0 0 8px var(--p)}
+.sk-panel{max-width:680px}
+.sk-hint{font-family:var(--fv);font-size:1.1rem;color:#888;margin-bottom:18px;line-height:1.6}
+.sk-video-wrap{
+  position:relative;border:2px solid var(--p);overflow:hidden;
+  box-shadow:0 0 30px #ff00ff33;max-width:420px;background:#000;
+  aspect-ratio:4/3;margin-bottom:14px;
+}
+#sk-video{width:100%;height:100%;object-fit:cover;display:block}
+.sk-scanline{
+  position:absolute;top:0;left:0;right:0;height:3px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--c),var(--p),var(--c),transparent);
+  animation:skscan 2s linear infinite;box-shadow:0 0 12px var(--p);
+}
+@keyframes skscan{from{top:0}to{top:100%}}
+.sk-status{font-family:var(--fm);font-size:.63rem;color:#ff00ff55;letter-spacing:1px;margin:10px 0;line-height:1.5}
+.sk-suggestions{margin:14px 0;display:flex;flex-direction:column;gap:8px}
+.sk-sug{
+  border:1px solid #ff00ff22;background:#0d0012;padding:12px 16px;
+  cursor:none;transition:all .25s;display:flex;align-items:center;gap:12px;
+}
+.sk-sug:hover{border-color:var(--p);background:#ff00ff0a;transform:translateX(5px)}
+.sk-sug-ico{font-size:1.3rem;flex-shrink:0}
+.sk-sug-label{font-family:var(--fp);font-size:.54rem;color:var(--p);margin-bottom:3px}
+.sk-sug-code{font-family:var(--fm);font-size:.6rem;color:#555;letter-spacing:1px}
+.sk-sug-match{font-family:var(--fm);font-size:.53rem;color:var(--c);margin-top:2px}
+.sk-result{margin-top:28px}
+.sk-milestone{
+  border:2px solid var(--p);background:#0d0012;padding:32px;
+  text-align:center;position:relative;overflow:hidden;
+  box-shadow:0 0 50px #ff00ff33,inset 0 0 30px #ff00ff08;
+  animation:milUnlock 1s ease;
+}
+@keyframes milUnlock{
+  0%{transform:scale(.92);opacity:0;filter:brightness(4)}
+  50%{filter:brightness(1.6)}
+  100%{transform:scale(1);opacity:1;filter:brightness(1)}
+}
+.sk-mil-icon{font-size:3.5rem;display:block;margin-bottom:12px;filter:drop-shadow(0 0 18px var(--p))}
+.sk-mil-rarity{
+  display:inline-block;font-family:var(--fp);font-size:.46rem;
+  padding:3px 10px;margin-bottom:14px;color:#000;
+  animation:bdgp 2s ease-in-out infinite;
+}
+.sk-mil-name{font-family:var(--fp);font-size:.78rem;color:var(--p);text-shadow:var(--gp);margin-bottom:10px;line-height:1.6}
+.sk-mil-desc{font-family:var(--fv);font-size:1.15rem;color:#bbb;margin-bottom:16px;line-height:1.6}
+.sk-mil-code{font-family:var(--fm);font-size:.58rem;color:#ff00ff33;letter-spacing:3px;margin-bottom:18px}
+.sk-mylist{margin-top:50px;border-top:1px solid #ff00ff22;padding-top:28px}
+.sk-mylist-title{font-family:var(--fp);font-size:.62rem;color:var(--c);text-shadow:var(--gc);margin-bottom:20px;letter-spacing:2px}
+.sk-items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px}
+.sk-mi{
+  border:1px solid #ff00ff22;background:#0d0012;padding:14px;text-align:center;
+  transition:all .3s;
+}
+.sk-mi:hover{border-color:var(--p);transform:translateY(-4px);box-shadow:0 8px 25px #ff00ff33}
+.sk-mi-ico{font-size:1.8rem;display:block;margin-bottom:7px}
+.sk-mi-lbl{font-family:var(--fp);font-size:.46rem;color:var(--p);line-height:1.6}
+.sk-mi-rar{font-family:var(--fm);font-size:.5rem;margin-top:4px}
 </style>
 
 <!-- SVG FILTERS for chromatic aberration -->
@@ -630,6 +700,7 @@ footer::before{
     <a href="#videos">VIDEOS</a>
     <a href="#community">COMUNIDAD</a>
     <a href="#proposals">PROPUESTAS</a>
+    <a href="#stickers">HITOS</a>
   </div>
 </nav>
 
@@ -1039,6 +1110,67 @@ footer::before{
   </div>
 </section>
 
+<!-- ══════════ STICKERS & MILESTONES ══════════ -->
+<section id="stickers">
+  <div class="inn">
+    <h2 class="stitle glitch">08 / PEGATINAS &amp; HITOS</h2>
+    <p style="font-family:var(--fv);font-size:1.2rem;color:#aaa;margin-bottom:30px;line-height:1.7">
+      ¿Tienes un código de pegatina de evento o de hito?
+      Escanea el <strong style="color:var(--c)">código QR</strong>
+      o escríbelo manualmente. Si la pegatina está desgastada, borrosa o tachada —
+      <strong style="color:var(--p)">escribe lo que puedas ver</strong>
+      y la guía encontrará la coincidencia más cercana.
+    </p>
+
+    <!-- TABS -->
+    <div class="sk-toggle-wrap">
+      <button class="sk-toggle on" id="sk-tab-qr" onclick="skTab('qr')">📷 ESCANEAR QR</button>
+      <button class="sk-toggle" id="sk-tab-manual" onclick="skTab('manual')">⌨️ CÓDIGO MANUAL</button>
+    </div>
+
+    <!-- QR PANEL -->
+    <div id="sk-panel-qr" class="sk-panel">
+      <p class="sk-hint">Apunta la cámara al código QR de tu pegatina o hito de evento. La guía lo detectará automáticamente.</p>
+      <div class="sk-video-wrap">
+        <video id="sk-video" playsinline muted></video>
+        <canvas id="sk-canvas" hidden></canvas>
+        <div class="sk-scanline"></div>
+      </div>
+      <p id="sk-qr-status" class="sk-status">// Cámara desactivada. Pulsa el botón para activar. //</p>
+      <button class="btn" id="sk-cam-btn" onclick="startQR()">📷 ACTIVAR CÁMARA</button>
+    </div>
+
+    <!-- MANUAL PANEL -->
+    <div id="sk-panel-manual" class="sk-panel" style="display:none">
+      <p class="sk-hint">
+        Escribe el código de la pegatina. Si está desgastado o borroso,
+        escribe los caracteres que puedas ver —
+        la guía encontrará la coincidencia más cercana automáticamente.
+      </p>
+      <input type="text" id="sk-code-input" class="fi"
+        style="font-size:1.4rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px"
+        placeholder="Ej: ULTRA2026 ó ULTR..."
+        oninput="skInputChange(this.value)"
+        onkeydown="if(event.key==='Enter')skSubmit()" />
+      <button class="fbtn" onclick="skSubmit()">⚡ VERIFICAR CÓDIGO ⚡</button>
+      <div id="sk-suggestions" class="sk-suggestions"></div>
+      <p id="sk-manual-status" class="sk-status"></p>
+    </div>
+
+    <!-- RESULT -->
+    <div id="sk-result" class="sk-result" style="display:none"></div>
+
+    <!-- MY MILESTONES -->
+    <div class="sk-mylist">
+      <div class="sk-mylist-title">// MIS HITOS DESBLOQUEADOS //</div>
+      <div id="sk-items-grid" class="sk-items-grid"></div>
+      <p id="sk-mylist-empty" style="font-family:var(--fm);font-size:.65rem;color:#ff00ff22;letter-spacing:1px">
+        // Ningún hito desbloqueado aún. Consigue tus pegatinas en los eventos. //
+      </p>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════ FOOTER ══════════ -->
 <footer>
   <div class="flogo glitch">SIX SEX ULTRA</div>
@@ -1233,6 +1365,171 @@ setInterval(()=>{
     setTimeout(()=>document.body.style.filter='',55);
   }
 },4500);
+
+/* ─── PEGATINAS & HITOS ─── */
+const CODES=[
+  {id:'ultra2026',   code:'ULTRA2026',   label:'ERA ULTRA',        desc:'Descargaste el álbum debut en la primera hora de lanzamiento.',    icon:'⚡',rarity:'LEGENDARIO'},
+  {id:'preescucha',  code:'PREESCUCHA',  label:'NOCHE HISTÓRICA',  desc:'Estuviste en la preescucha del 25 de mayo 2026.',                  icon:'🌙',rarity:'ÉPICO'},
+  {id:'cueva01',     code:'CUEVA01',     label:'PRIMERA CUEVA',    desc:'Fan fundador/a de la primera web hispana de Six Sex.',             icon:'🖤',rarity:'RARO'},
+  {id:'rave666',     code:'RAVE666',     label:'RAVE UNDERGROUND', desc:'Asististe a un evento oficial del under argentino.',               icon:'🔮',rarity:'ÉPICO'},
+  {id:'sixsex4ever', code:'SIXSEX4EVER', label:'FAN ETERNO',       desc:'Llevas la vibra de Six Sex hasta el final. Sin frenos.',           icon:'💜',rarity:'COMÚN'},
+  {id:'caos',        code:'CAOS',        label:'REINA DEL CAOS',   desc:'Modo caos activado. Sin filtros. Sin disculpas.',                  icon:'💥',rarity:'LEGENDARIO'},
+  {id:'ultra777',    code:'ULTRA777',    label:'NÚMERO DEL CAOS',  desc:'El 777 de la era ravetón. Suerte máxima en la cueva.',             icon:'✦', rarity:'RARO'},
+  {id:'perreomax',   code:'PERREOMAX',   label:'PERREO MÁXIMO',    desc:'Certificado oficial de perreo extremo y sin disculpas.',           icon:'🔥',rarity:'COMÚN'},
+];
+const RC={LEGENDARIO:'#ffaa00',ÉPICO:'#aa00ff',RARO:'#00aaff',COMÚN:'#00ff88'};
+
+function normC(s){return s.toUpperCase().replace(/[\s\-_\.]/g,'')}
+
+// Levenshtein distance for fuzzy matching of worn codes
+function lev(a,b){
+  const m=a.length,n=b.length;
+  const dp=Array.from({length:m+1},(_,i)=>[...Array(n+1)].map((_,j)=>i?j?0:i:j));
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)
+    dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
+  return dp[m][n];
+}
+function fuzzyMatch(inp){
+  const ni=normC(inp);if(ni.length<2)return[];
+  return CODES.map(c=>{
+    const nc=normC(c.code),dist=lev(ni,nc);
+    return{...c,dist,ok:dist<=Math.max(2,Math.floor(nc.length*.38))||nc.startsWith(ni)||nc.includes(ni)};
+  }).filter(c=>c.ok).sort((a,b)=>a.dist-b.dist).slice(0,4);
+}
+function exactMatch(inp){const ni=normC(inp);return CODES.find(c=>normC(c.code)===ni)||null}
+
+function skTab(tab){
+  document.getElementById('sk-panel-qr').style.display=tab==='qr'?'':'none';
+  document.getElementById('sk-panel-manual').style.display=tab==='manual'?'':'none';
+  document.getElementById('sk-tab-qr').classList.toggle('on',tab==='qr');
+  document.getElementById('sk-tab-manual').classList.toggle('on',tab==='manual');
+  if(tab!=='qr')stopQR();
+}
+
+function skInputChange(val){
+  const sug=document.getElementById('sk-suggestions');
+  const st=document.getElementById('sk-manual-status');
+  if(!val.trim()){sug.innerHTML='';st.textContent='';return}
+  const matches=fuzzyMatch(val);
+  if(!matches.length){
+    sug.innerHTML='';
+    st.textContent='// Código no reconocido — escribe más caracteres //';
+  }else{
+    st.textContent='// Posibles coincidencias — selecciona o pulsa VERIFICAR //';
+    sug.innerHTML=matches.map(c=>`
+      <div class="sk-sug" onclick="document.getElementById('sk-code-input').value='${c.code}';skSubmit()">
+        <span class="sk-sug-ico">${c.icon}</span>
+        <div>
+          <div class="sk-sug-label">${c.label}</div>
+          <div class="sk-sug-code">▸ ${c.code}</div>
+          <div class="sk-sug-match">${c.dist===0?'✓ COINCIDENCIA EXACTA':'~ '+c.dist+' caracter(es) diferente(s)'}</div>
+        </div>
+      </div>`).join('');
+    document.querySelectorAll('.sk-sug').forEach(el=>{
+      el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+      el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+    });
+  }
+}
+
+function skSubmit(){
+  const val=document.getElementById('sk-code-input').value;
+  const st=document.getElementById('sk-manual-status');
+  const match=exactMatch(val)||fuzzyMatch(val)[0];
+  if(!match){st.textContent='❌ Código no encontrado. Revisa los caracteres visibles en la pegatina.';return}
+  document.getElementById('sk-suggestions').innerHTML='';
+  st.textContent='';
+  showMilestone(match);
+}
+
+function showMilestone(c){
+  const col=RC[c.rarity]||'#ff00ff';
+  const already=getMilestones().includes(c.id);
+  const r=document.getElementById('sk-result');
+  r.style.display='block';
+  r.innerHTML=`<div class="sk-milestone">
+    <span class="sk-mil-icon">${c.icon}</span>
+    <div class="sk-mil-rarity" style="background:${col}">${c.rarity}</div>
+    <div class="sk-mil-name">${c.label}</div>
+    <div class="sk-mil-desc">${c.desc}</div>
+    <div class="sk-mil-code">// CÓDIGO: ${c.code} //</div>
+    ${already
+      ?'<div style="margin-top:14px;font-family:var(--fp);font-size:.56rem;color:var(--c);letter-spacing:2px">✓ YA ESTÁ EN TUS HITOS</div>'
+      :`<button class="btn" style="margin-top:14px" onclick="addMilestone('${c.id}')">✦ AÑADIR A MIS HITOS ✦</button>`}
+  </div>`;
+  r.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function getMilestones(){return JSON.parse(localStorage.getItem('sxu_ms')||'[]')}
+function addMilestone(id){
+  const ms=getMilestones();if(ms.includes(id))return;
+  ms.push(id);localStorage.setItem('sxu_ms',JSON.stringify(ms));
+  renderMyList();
+  const btn=document.querySelector('#sk-result .btn');
+  if(btn){btn.textContent='✓ HITO AÑADIDO';btn.style.color='var(--c)';btn.style.borderColor='var(--c)';btn.disabled=true;btn.onclick=null}
+}
+function renderMyList(){
+  const ms=getMilestones();
+  const empty=document.getElementById('sk-mylist-empty');
+  const grid=document.getElementById('sk-items-grid');
+  if(!ms.length){empty.style.display='block';grid.innerHTML='';return}
+  empty.style.display='none';
+  grid.innerHTML=ms.map(id=>{
+    const c=CODES.find(x=>x.id===id);if(!c)return'';
+    return`<div class="sk-mi">
+      <span class="sk-mi-ico">${c.icon}</span>
+      <div class="sk-mi-lbl">${c.label}</div>
+      <div class="sk-mi-rar" style="color:${RC[c.rarity]||'#ff00ff'}">${c.rarity}</div>
+    </div>`;
+  }).join('');
+}
+renderMyList();
+
+/* QR SCANNING */
+let qrActive=false,qrStream=null,qrRaf=null;
+async function startQR(){
+  if(qrActive){stopQR();return}
+  const btn=document.getElementById('sk-cam-btn');
+  const st=document.getElementById('sk-qr-status');
+  st.textContent='// Iniciando cámara... //';
+  try{
+    qrStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}}});
+    const v=document.getElementById('sk-video');
+    v.srcObject=qrStream;await v.play();
+    qrActive=true;
+    btn.textContent='⬛ DETENER CÁMARA';
+    st.textContent='// Apunta la cámara al código QR de la pegatina //';
+    qrLoop();
+  }catch(e){
+    st.textContent='⚠ Cámara no disponible. Usa el modo de código manual (pestaña ⌨️).';
+  }
+}
+function stopQR(){
+  if(qrStream)qrStream.getTracks().forEach(t=>t.stop());
+  qrActive=false;qrStream=null;cancelAnimationFrame(qrRaf);
+  const btn=document.getElementById('sk-cam-btn');
+  const st=document.getElementById('sk-qr-status');
+  if(btn)btn.textContent='📷 ACTIVAR CÁMARA';
+  if(st)st.textContent='// Cámara desactivada. //';
+}
+function qrLoop(){
+  if(!qrActive)return;
+  const v=document.getElementById('sk-video');
+  const cnv=document.getElementById('sk-canvas');
+  if(v.readyState===v.HAVE_ENOUGH_DATA){
+    cnv.width=v.videoWidth;cnv.height=v.videoHeight;
+    const ctx=cnv.getContext('2d');ctx.drawImage(v,0,0);
+    if(window.jsQR){
+      const img=ctx.getImageData(0,0,cnv.width,cnv.height);
+      const qr=jsQR(img.data,img.width,img.height);
+      if(qr&&qr.data){
+        const match=exactMatch(qr.data)||fuzzyMatch(qr.data)[0];
+        if(match){stopQR();showMilestone(match);return}
+      }
+    }
+  }
+  qrRaf=requestAnimationFrame(qrLoop);
+}
 </script>
 </body>
 </html>
